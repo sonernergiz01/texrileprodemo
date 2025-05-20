@@ -1,0 +1,25 @@
+Uncaught SyntaxError: The requested module '/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=66b2a405' does not provide an export named 'useNavigate' (at ship.tsx:47:10)Understand this error
+chunk-RPCDYKBN.js?v=66b2a405:14032 The above error occurred in one of your React components:
+
+    at Lazy
+    at Suspense
+    at component
+    at main
+    at div
+    at div
+    at AppLayout (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/components/layout/app-layout.tsx:22:29)
+    at Route (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=66b2a405:265:16)
+    at ProtectedRoute (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/lib/protected-route.tsx:23:3)
+    at Switch (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=66b2a405:321:17)
+    at Router
+    at Provider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=66b2a405:38:15)
+    at TooltipProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=66b2a405:64:5)
+    at MobileProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-mobile.tsx:20:34)
+    at AuthProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-auth.tsx:26:32)
+    at QueryClientProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=66b2a405:2805:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+logCapturedError @ chunk-RPCDYKBN.js?v=66b2a405:14032Understand this error
+chunk-RPCDYKBN.js?v=66b2a405:19413 Uncaught SyntaxError: The requested module '/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=66b2a405' does not provide an export named 'useNavigate' (at ship.tsx:47:10)Understand this error

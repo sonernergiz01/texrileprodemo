@@ -1,0 +1,272 @@
+queryClient.ts:102 API yanıtı JSON formatında değil: <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script type="module">
+import { createHotContext } from "/@vite/client";
+const hot = createHotContext("/__dummy__runtime-error-plugin");
+
+function sendErr...
+(anonymous) @ queryClient.ts:102
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=e1ebbaaa:840
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:2245
+setInterval
+updateRefetchInterval_fn @ @tanstack_react-query.js?v=e1ebbaaa:2243
+updateTimers_fn @ @tanstack_react-query.js?v=e1ebbaaa:2250
+onQueryUpdate @ @tanstack_react-query.js?v=e1ebbaaa:2206
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:998
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:997
+batch @ @tanstack_react-query.js?v=e1ebbaaa:583
+dispatch_fn @ @tanstack_react-query.js?v=e1ebbaaa:996
+onError @ @tanstack_react-query.js?v=e1ebbaaa:861
+reject @ @tanstack_react-query.js?v=e1ebbaaa:465
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:508
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:2245
+setInterval
+updateRefetchInterval_fn @ @tanstack_react-query.js?v=e1ebbaaa:2243
+updateTimers_fn @ @tanstack_react-query.js?v=e1ebbaaa:2250
+onQueryUpdate @ @tanstack_react-query.js?v=e1ebbaaa:2206
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:998
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:997
+batch @ @tanstack_react-query.js?v=e1ebbaaa:583
+dispatch_fn @ @tanstack_react-query.js?v=e1ebbaaa:996
+onError @ @tanstack_react-query.js?v=e1ebbaaa:861
+reject @ @tanstack_react-query.js?v=e1ebbaaa:465
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:508
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:2245
+setInterval
+updateRefetchInterval_fn @ @tanstack_react-query.js?v=e1ebbaaa:2243
+updateTimers_fn @ @tanstack_react-query.js?v=e1ebbaaa:2250
+onQueryUpdate @ @tanstack_react-query.js?v=e1ebbaaa:2206
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:998
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:997
+batch @ @tanstack_react-query.js?v=e1ebbaaa:583
+dispatch_fn @ @tanstack_react-query.js?v=e1ebbaaa:996
+onError @ @tanstack_react-query.js?v=e1ebbaaa:861
+reject @ @tanstack_react-query.js?v=e1ebbaaa:465
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:508
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:2245
+setInterval
+updateRefetchInterval_fn @ @tanstack_react-query.js?v=e1ebbaaa:2243
+updateTimers_fn @ @tanstack_react-query.js?v=e1ebbaaa:2250
+onQueryUpdate @ @tanstack_react-query.js?v=e1ebbaaa:2206
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:998
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:997
+batch @ @tanstack_react-query.js?v=e1ebbaaa:583
+dispatch_fn @ @tanstack_react-query.js?v=e1ebbaaa:996
+onError @ @tanstack_react-query.js?v=e1ebbaaa:861
+reject @ @tanstack_react-query.js?v=e1ebbaaa:465
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:508Understand this error
+queryClient.ts:107 API yanıtı işlenirken hata oluştu: Error: API yanıtı geçerli JSON formatında değil
+    at queryClient.ts:103:19
+(anonymous) @ queryClient.ts:107
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=e1ebbaaa:840
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:2245
+setInterval
+updateRefetchInterval_fn @ @tanstack_react-query.js?v=e1ebbaaa:2243
+updateTimers_fn @ @tanstack_react-query.js?v=e1ebbaaa:2250
+onQueryUpdate @ @tanstack_react-query.js?v=e1ebbaaa:2206
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:998
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:997
+batch @ @tanstack_react-query.js?v=e1ebbaaa:583
+dispatch_fn @ @tanstack_react-query.js?v=e1ebbaaa:996
+onError @ @tanstack_react-query.js?v=e1ebbaaa:861
+reject @ @tanstack_react-query.js?v=e1ebbaaa:465
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:508
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:2245
+setInterval
+updateRefetchInterval_fn @ @tanstack_react-query.js?v=e1ebbaaa:2243
+updateTimers_fn @ @tanstack_react-query.js?v=e1ebbaaa:2250
+onQueryUpdate @ @tanstack_react-query.js?v=e1ebbaaa:2206
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:998
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:997
+batch @ @tanstack_react-query.js?v=e1ebbaaa:583
+dispatch_fn @ @tanstack_react-query.js?v=e1ebbaaa:996
+onError @ @tanstack_react-query.js?v=e1ebbaaa:861
+reject @ @tanstack_react-query.js?v=e1ebbaaa:465
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:508
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:2245
+setInterval
+updateRefetchInterval_fn @ @tanstack_react-query.js?v=e1ebbaaa:2243
+updateTimers_fn @ @tanstack_react-query.js?v=e1ebbaaa:2250
+onQueryUpdate @ @tanstack_react-query.js?v=e1ebbaaa:2206
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:998
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:997
+batch @ @tanstack_react-query.js?v=e1ebbaaa:583
+dispatch_fn @ @tanstack_react-query.js?v=e1ebbaaa:996
+onError @ @tanstack_react-query.js?v=e1ebbaaa:861
+reject @ @tanstack_react-query.js?v=e1ebbaaa:465
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:508
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:2245
+setInterval
+updateRefetchInterval_fn @ @tanstack_react-query.js?v=e1ebbaaa:2243
+updateTimers_fn @ @tanstack_react-query.js?v=e1ebbaaa:2250
+onQueryUpdate @ @tanstack_react-query.js?v=e1ebbaaa:2206
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:998
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:997
+batch @ @tanstack_react-query.js?v=e1ebbaaa:583
+dispatch_fn @ @tanstack_react-query.js?v=e1ebbaaa:996
+onError @ @tanstack_react-query.js?v=e1ebbaaa:861
+reject @ @tanstack_react-query.js?v=e1ebbaaa:465
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:508Understand this error
+queryClient.ts:111 Query Request failed: GET /api/admin/notification-stats Error: API yanıtı geçerli JSON formatında değil
+    at queryClient.ts:103:19

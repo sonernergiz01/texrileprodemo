@@ -1,0 +1,1049 @@
+import { useState, useEffect } from "react";
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { apiRequest, queryClient } from '@/lib/queryClient';
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Textarea } from "@/components/ui/textarea";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { toast } from "@/hooks/use-toast";
+import { BarChart, CalendarIcon, FileText, Loader2, Plus, Printer, Save, Trash } from "lucide-react";
+import { format } from 'date-fns';
+import { tr } from 'date-fns/locale';
+
+const orderSchema = z.object({
+  orderNumber: z.string().min(1, "Sipariş numarası gereklidir"),
+  customerId: z.coerce.number().min(1, "Müşteri seçilmelidir"),
+  fabricTypeId: z.coerce.number().nullable().optional(),
+  quantity: z.string().min(1, "Miktar girilmelidir"),
+  // Birşey gönderilmese bile "0" değeri verilecek
+  unitPrice: z.string().default("0").or(z.number().transform(n => n.toString())), 
+  unit: z.string().default("metre"),
+  orderDate: z.date(),
+  dueDate: z.date(),
+  statusId: z.coerce.number().default(1), // Default değer: Beklemede (1)
+  notes: z.string().nullable().optional(),
+  
+  // Yeni alanlar
+  orderType: z.enum(["direct", "block", "block_color"]).default("direct"),
+  marketType: z.enum(["iç", "dış"]).default("iç"),
+  variant: z.string().nullable().optional(),
+  feel: z.string().nullable().optional(),
+  width: z.string().nullable().optional(),
+  weight: z.string().nullable().optional(),
+  blend: z.string().nullable().optional(),
+  groupName: z.string().nullable().optional(),
+  color: z.string().nullable().optional(),
+  pattern: z.string().nullable().optional(),
+  parentOrderId: z.coerce.number().nullable().optional(),
+  
+  // Diğer sipariş detayları
+  articleNo: z.string().nullable().optional(),
+  fabricQualityId: z.coerce.number().nullable().optional(),
+  qualityStandard: z.string().nullable().optional(),
+  deliveryTerms: z.string().nullable().optional(),
+  paymentTerms: z.string().nullable().optional(),
+  documentNo: z.string().nullable().optional(),
+  firmaPoNo: z.string().nullable().optional(),
+  isUrgent: z.boolean().default(false),
+});
+
+type OrderFormValues = z.infer<typeof orderSchema>;
+
+export default function OrderPage() {
+  const [activeTab, setActiveTab] = useState("new-order");
+  const [isAddItemDialogOpen, setIsAddItemDialogOpen] = useState(false);
+  const [orderItems, setOrderItems] = useState<any[]>([]);
+  const [selectedOrderType, setSelectedOrderType] = useState("direct");
+  
+  // Sipariş kalemi ekleme için state'ler
+  const [itemDescription, setItemDescription] = useState("");
+  const [itemQuantity, setItemQuantity] = useState("");
+  const [itemUnit, setItemUnit] = useState("metre");
+  const [itemNotes, setItemNotes] = useState("");
+
+  // Verileri getir
+  const { data: customers = [] } = useQuery<any[]>({
+    queryKey: ['/api/customers'],
+  });
+
+  const { data: fabricTypes = [] } = useQuery<any[]>({
+    queryKey: ['/api/master/fabrics'],
+  });
+
+  const { data: fabricQualities = [] } = useQuery<any[]>({
+    queryKey: ['/api/master/fabricqualities'],
+    enabled: false, // Bu uç nokta henüz mevcut olmayabilir, gerekirse etkinleştirin
+  });
+
+  const { data: orderStatuses = [] } = useQuery<any[]>({
+    queryKey: ['/api/order-statuses'],
+  });
+
+  const { data: orders = [] } = useQuery<any[]>({
+    queryKey: ['/api/orders'],
+  });
+
+  // Form tanımı
+  const form = useForm<OrderFormValues>({
+    resolver: zodResolver(orderSchema),
+    defaultValues: {
+      orderNumber: `SIP-${new Date().getFullYear()}-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
+      orderDate: new Date(),
+      dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 gün sonra
+      unit: "metre",
+      orderType: "direct",
+      marketType: "iç",
+      isUrgent: false,
+      unitPrice: "0", // Veritabanında zorunlu olduğu için default değer ekledik
+    },
+  });
+  
+  // Sipariş türü değiştiğinde formu güncelle
+  const handleOrderTypeChange = (value: string) => {
+    setSelectedOrderType(value);
+    form.setValue("orderType", value as "direct" | "block" | "block_color");
+    
+    // Eğer block_color (alt sipariş) seçildiyse parent sipariş seçimini aktif et
+    if (value === "block_color") {
+      // Parent order ID formunu göster
+    } else {
+      form.setValue("parentOrderId", undefined);
+    }
+  };
+
+  // Sipariş gönderme
+  const orderMutation = useMutation({
+    mutationFn: async (values: OrderFormValues) => {
+      const res = await apiRequest('POST', '/api/orders', values);
+      return res.json();
+    },
+    onSuccess: (data) => {
+      // Otomatik planlama bilgisi varsa detaylı mesaj göster
+      if (data.productionPlan) {
+        toast({
+          title: "Sipariş kaydedildi",
+          description: `Sipariş başarıyla kaydedildi ve otomatik olarak planlamaya alındı. Üretim Plan No: ${data.productionPlan.planNo}`,
+        });
+      } else if (data.warning) {
+        // Sipariş oluşturuldu ama planlama yapılamadı
+        toast({
+          title: "Sipariş kaydedildi",
+          description: data.warning,
+          variant: "destructive",
+        });
+      } else {
+        // Standart başarı mesajı
+        toast({
+          title: "Sipariş kaydedildi",
+          description: "Sipariş başarıyla kaydedildi.",
+        });
+      }
+      
+      queryClient.invalidateQueries({ queryKey: ['/api/orders'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/planning/production-plans'] });
+      
+      form.reset();
+      setOrderItems([]);
+      setActiveTab("orders");
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Hata",
+        description: `Sipariş kaydedilirken bir hata oluştu: ${error.message}`,
+        variant: "destructive",
+      });
+    }
+  });
+
+  const handleSubmit = (values: OrderFormValues) => {
+    // Verileri formatlayalım
+    const finalData = { 
+      ...values,
+      statusId: 1 // Beklemede
+    };
+    
+    // unitPrice için sayısal değer ataması yapalım
+    if (!finalData.unitPrice) {
+      finalData.unitPrice = "0";
+    }
+    
+    // Debug için console.log ile gönderilen verileri görüntüle
+    console.log("Gönderilen sipariş verileri:", finalData);
+    
+    try {
+      orderMutation.mutate(finalData);
+    } catch (error) {
+      console.error("Sipariş oluşturma hatası:", error);
+      toast({
+        title: "Hata",
+        description: "Sipariş oluşturulurken bir hata oluştu. Lütfen tekrar deneyin.",
+        variant: "destructive"
+      });
+    }
+  };
+
+  return (
+    <div className="p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold text-gray-900">Sipariş Yönetimi</h1>
+      </div>
+
+      <Tabs defaultValue="new-order" value={activeTab} onValueChange={setActiveTab}>
+        <TabsList className="mb-4">
+          <TabsTrigger value="new-order">Yeni Sipariş</TabsTrigger>
+          <TabsTrigger value="orders">Siparişler</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="new-order">
+          <Card className="border-t-4 border-indigo-600 shadow-md">
+            <CardHeader className="pb-2 border-b">
+              <CardTitle className="text-xl font-bold text-indigo-700">Sipariş Bilgileri</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-6">
+              <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+                {/* Ana bilgiler - 4 kolonlu yatay düzen */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {/* Temel bilgiler */}
+                  <div>
+                    <Label htmlFor="orderNumber" className="text-sm font-semibold text-gray-700">Sipariş No</Label>
+                    <Input 
+                      id="orderNumber"
+                      className="mt-1 border-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                      {...form.register("orderNumber")} 
+                      disabled
+                    />
+                    {form.formState.errors.orderNumber && (
+                      <p className="mt-1 text-sm text-red-500">{form.formState.errors.orderNumber.message}</p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="customerId" className="text-sm font-semibold text-gray-700">Müşteri</Label>
+                    <Select 
+                      onValueChange={(value) => form.setValue("customerId", parseInt(value))}
+                      defaultValue={form.getValues("customerId")?.toString()}
+                    >
+                      <SelectTrigger className="mt-1 border-2 border-gray-300 focus:border-indigo-500">
+                        <SelectValue placeholder="Müşteri Seçin" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {customers.map((customer: any) => (
+                          <SelectItem key={customer.id} value={customer.id.toString()}>
+                            {customer.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {form.formState.errors.customerId && (
+                      <p className="mt-1 text-sm text-red-500">{form.formState.errors.customerId.message}</p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="orderType" className="text-sm font-semibold text-gray-700">Sipariş Türü</Label>
+                    <Select 
+                      onValueChange={handleOrderTypeChange}
+                      defaultValue={selectedOrderType}
+                    >
+                      <SelectTrigger className="mt-1 border-2 border-gray-300 focus:border-indigo-500">
+                        <SelectValue placeholder="Sipariş Türü" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="direct">Doğrudan Sipariş</SelectItem>
+                        <SelectItem value="block">Blok Sipariş</SelectItem>
+                        <SelectItem value="block_color">Alt Sipariş (Renk)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="marketType" className="text-sm font-semibold text-gray-700">Piyasa Türü</Label>
+                    <Select 
+                      onValueChange={(value) => form.setValue("marketType", value as "iç" | "dış")}
+                      defaultValue={form.getValues("marketType")}
+                    >
+                      <SelectTrigger className="mt-1 border-2 border-gray-300 focus:border-indigo-500">
+                        <SelectValue placeholder="Piyasa Türü" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="iç">İç Piyasa</SelectItem>
+                        <SelectItem value="dış">Dış Piyasa</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                
+                {/* Tarihler ve üst bilgiler - 4 kolonlu yatay düzen */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 border-t border-gray-200 pt-6">
+                  <div>
+                    <Label htmlFor="orderDate" className="text-sm font-semibold text-gray-700">Sipariş Tarihi</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="mt-1 w-full justify-start text-left font-normal border-2 border-gray-300 hover:bg-gray-50"
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4 text-indigo-600" />
+                          {form.getValues("orderDate") ? (
+                            format(form.getValues("orderDate"), "dd.MM.yyyy", { locale: tr })
+                          ) : (
+                            <span>Tarih Seçin</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={form.getValues("orderDate")}
+                          onSelect={(date) => form.setValue("orderDate", date || new Date())}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="dueDate" className="text-sm font-semibold text-gray-700">Termin Tarihi</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className="mt-1 w-full justify-start text-left font-normal border-2 border-gray-300 hover:bg-gray-50"
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4 text-indigo-600" />
+                          {form.getValues("dueDate") ? (
+                            format(form.getValues("dueDate"), "dd.MM.yyyy", { locale: tr })
+                          ) : (
+                            <span>Tarih Seçin</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          selected={form.getValues("dueDate")}
+                          onSelect={(date) => form.setValue("dueDate", date || new Date())}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="fabricTypeId" className="text-sm font-semibold text-gray-700">Ürün Adı</Label>
+                    <Select 
+                      onValueChange={(value) => {
+                        const fabricId = parseInt(value);
+                        form.setValue("fabricTypeId", fabricId);
+                        
+                        // Seçilen kumaş tipinin özelliklerini otomatik olarak doldur
+                        const selectedFabric = fabricTypes.find((f: any) => f.id === fabricId);
+                        if (selectedFabric && selectedFabric.properties) {
+                          // En bilgisini doldur
+                          if (selectedFabric.properties.en) {
+                            form.setValue("width", selectedFabric.properties.en.toString());
+                          }
+                          
+                          // Gramaj bilgisini doldur
+                          if (selectedFabric.properties.gramaj) {
+                            form.setValue("weight", selectedFabric.properties.gramaj.toString());
+                          }
+                        }
+                      }}
+                      defaultValue={form.getValues("fabricTypeId")?.toString()}
+                    >
+                      <SelectTrigger className="mt-1 border-2 border-gray-300 focus:border-indigo-500">
+                        <SelectValue placeholder="Kumaş Tipi Seçin" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {fabricTypes.map((fabricType: any) => (
+                          <SelectItem key={fabricType.id} value={fabricType.id.toString()}>
+                            {fabricType.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="isUrgent" className="text-sm font-semibold text-gray-700">Sipariş Önceliği</Label>
+                    <Select 
+                      onValueChange={(value) => form.setValue("isUrgent", value === "true")}
+                      defaultValue={form.getValues("isUrgent") ? "true" : "false"}
+                    >
+                      <SelectTrigger className="mt-1 border-2 border-gray-300 focus:border-indigo-500">
+                        <SelectValue placeholder="Öncelik Seçin" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="true">ACELELİ</SelectItem>
+                        <SelectItem value="false">NORMAL</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                
+                {/* Alt sipariş seçiliyse parent sipariş seçimi */}
+                {selectedOrderType === "block_color" && (
+                  <div className="border-t border-gray-200 pt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <Label htmlFor="parentOrderId" className="text-sm font-semibold text-gray-700">Bağlı Olduğu Blok Sipariş</Label>
+                        <Select 
+                          onValueChange={(value) => form.setValue("parentOrderId", parseInt(value))}
+                          defaultValue={form.getValues("parentOrderId")?.toString()}
+                        >
+                          <SelectTrigger className="mt-1 border-2 border-gray-300 focus:border-indigo-500">
+                            <SelectValue placeholder="Blok Sipariş Seçin" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {orders
+                              .filter((order: any) => order.orderType === "block")
+                              .map((order: any) => (
+                                <SelectItem key={order.id} value={order.id.toString()}>
+                                  {order.orderNumber}
+                                </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                  
+                  {/* Sipariş miktarı ve ek bilgiler - 4 kolonlu yatay düzen */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 border-t border-gray-200 pt-6">
+                    <div>
+                      <Label htmlFor="quantity" className="text-sm font-semibold text-gray-700">Miktar</Label>
+                      <Input 
+                        id="quantity" 
+                        className="mt-1 border-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                        {...form.register("quantity")} 
+                      />
+                      {form.formState.errors.quantity && (
+                        <p className="mt-1 text-sm text-red-500">{form.formState.errors.quantity.message}</p>
+                      )}
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="unit" className="text-sm font-semibold text-gray-700">Birim</Label>
+                      <Select 
+                        onValueChange={(value) => form.setValue("unit", value)}
+                        defaultValue={form.getValues("unit") || "metre"}
+                      >
+                        <SelectTrigger className="mt-1 border-2 border-gray-300 focus:border-indigo-500">
+                          <SelectValue placeholder="Birim Seçin" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="metre">Metre</SelectItem>
+                          <SelectItem value="adet">Adet</SelectItem>
+                          <SelectItem value="kg">Kilogram</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="width" className="text-sm font-semibold text-gray-700">En (cm)</Label>
+                      <Input 
+                        id="width" 
+                        className="mt-1 border-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                        {...form.register("width")} 
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="weight" className="text-sm font-semibold text-gray-700">Gramaj (g/m²)</Label>
+                      <Input 
+                        id="weight" 
+                        className="mt-1 border-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                        {...form.register("weight")} 
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Renk ve desen - 4 kolonlu yatay düzen */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 border-t border-gray-200 pt-6">
+                    <div>
+                      <Label htmlFor="color" className="text-sm font-semibold text-gray-700">Renk</Label>
+                      <Input 
+                        id="color" 
+                        className="mt-1 border-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                        {...form.register("color")} 
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="pattern" className="text-sm font-semibold text-gray-700">Desen</Label>
+                      <Input 
+                        id="pattern" 
+                        className="mt-1 border-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                        {...form.register("pattern")} 
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="feel" className="text-sm font-semibold text-gray-700">Tuşe</Label>
+                      <Input 
+                        id="feel" 
+                        className="mt-1 border-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                        {...form.register("feel")} 
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="blend" className="text-sm font-semibold text-gray-700">Harman</Label>
+                      <Input 
+                        id="blend" 
+                        className="mt-1 border-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                        {...form.register("blend")} 
+                      />
+                    </div>
+                  </div>
+                  
+                  {/* Notlar */}
+                  <div className="border-t border-gray-200 pt-6">
+                    <Label htmlFor="notes" className="text-sm font-semibold text-gray-700">Notlar</Label>
+                    <Textarea 
+                      id="notes" 
+                      {...form.register("notes")} 
+                      placeholder="Siparişe ait özel notlar..." 
+                      className="mt-1 min-h-24 border-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500" 
+                    />
+                  </div>
+                  
+                  {/* Kaydet butonu */}
+                  <div className="flex justify-end pt-6 border-t border-gray-200 mt-6">
+                    <Button 
+                      type="submit" 
+                      className="w-40 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white font-medium shadow-md"
+                      disabled={orderMutation.isPending}
+                    >
+                      {orderMutation.isPending ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Kaydediliyor...
+                        </>
+                      ) : (
+                        <>
+                          <Save className="mr-2 h-4 w-4" />
+                          Kaydet
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </TabsContent>
+                  
+                  {/* Eski sipariş kalemi ekleme bölümü - artık kullanılmıyor */}
+                  <div className="hidden mt-6">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-lg font-semibold">Sipariş Detayları</h3>
+                      <Dialog open={isAddItemDialogOpen} onOpenChange={setIsAddItemDialogOpen}>
+                        <DialogTrigger asChild>
+                          <Button size="sm">
+                            <Plus className="h-4 w-4 mr-2" />
+                            Kalem Ekle
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Sipariş Kalemi Ekle</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4 py-4">
+                            <div className="space-y-2">
+                              <Label htmlFor="description">Tanım</Label>
+                              <Input 
+                                id="description" 
+                                placeholder="Sipariş kalemi tanımını girin" 
+                                value={itemDescription}
+                                onChange={(e) => setItemDescription(e.target.value)}
+                              />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="space-y-2">
+                                <Label htmlFor="item-quantity">Miktar</Label>
+                                <Input 
+                                  id="item-quantity" 
+                                  type="number" 
+                                  min="0" 
+                                  step="0.01" 
+                                  value={itemQuantity}
+                                  onChange={(e) => setItemQuantity(e.target.value)}
+                                />
+                              </div>
+                              <div className="space-y-2">
+                                <Label htmlFor="item-unit">Birim</Label>
+                                <Select 
+                                  defaultValue="metre"
+                                  value={itemUnit}
+                                  onValueChange={(value) => setItemUnit(value)}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Birim Seçin" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="metre">Metre</SelectItem>
+                                    <SelectItem value="kg">Kg</SelectItem>
+                                    <SelectItem value="adet">Adet</SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              </div>
+                            </div>
+
+                            <div className="space-y-2">
+                              <Label htmlFor="item-notes">Notlar</Label>
+                              <Textarea 
+                                id="item-notes" 
+                                placeholder="Ek bilgiler..." 
+                                value={itemNotes}
+                                onChange={(e) => setItemNotes(e.target.value)}
+                              />
+                            </div>
+                            <div className="flex justify-end space-x-2 mt-4">
+                              <Button
+                                onClick={() => {
+                                  // Kullanıcının girdiği değerleri kullan
+                                  if (!itemDescription || !itemQuantity) {
+                                    toast({
+                                      title: "Hata",
+                                      description: "Tanım ve miktar alanları zorunludur",
+                                      variant: "destructive",
+                                    });
+                                    return;
+                                  }
+                                  
+                                  setOrderItems([
+                                    ...orderItems,
+                                    {
+                                      id: Date.now(),
+                                      description: itemDescription,
+                                      quantity: parseFloat(itemQuantity),
+                                      unit: itemUnit,
+                                      unitPrice: 0, // Default 0
+                                      color: "" // Renk kullanılmıyor
+                                    }
+                                  ]);
+                                  
+                                  // Input alanlarını temizle
+                                  setItemDescription("");
+                                  setItemQuantity("");
+                                  setItemUnit("metre");
+                                  setItemNotes("");
+                                  
+                                  // Dialog'u kapat
+                                  setIsAddItemDialogOpen(false);
+                                }}
+                              >
+                                Ekle
+                              </Button>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                    <div className="border rounded-md">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Tanım</TableHead>
+                            <TableHead>Miktar</TableHead>
+                            <TableHead>Birim</TableHead>
+                            <TableHead className="text-right">İşlemler</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {orderItems.length === 0 ? (
+                            <TableRow>
+                              <TableCell colSpan={7} className="text-center text-muted-foreground py-6">
+                                Henüz sipariş kalemi eklenmemiş. Yeni kalem eklemek için "Kalem Ekle" butonunu kullanın.
+                              </TableCell>
+                            </TableRow>
+                          ) : (
+                            orderItems.map((item) => (
+                              <TableRow key={item.id}>
+                                <TableCell>{item.description}</TableCell>
+                                <TableCell>{item.quantity}</TableCell>
+                                <TableCell>{item.unit}</TableCell>
+                                <TableCell className="text-right">
+                                  <Button 
+                                    size="icon" 
+                                    variant="ghost" 
+                                    onClick={() => {
+                                      setOrderItems(orderItems.filter(i => i.id !== item.id));
+                                    }}
+                                  >
+                                    <Trash className="h-4 w-4" />
+                                  </Button>
+                                </TableCell>
+                              </TableRow>
+                            ))
+                          )}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  </div>
+                  
+                  {/* Teknik Bilgiler Alanı */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <h3 className="text-lg font-semibold mb-4">Teknik Bilgiler</h3>
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="width">En</Label>
+                            <Input 
+                              id="width" 
+                              {...form.register("width")}
+                              placeholder="0"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="weight">Gramaj</Label>
+                            <Input 
+                              id="weight" 
+                              {...form.register("weight")}
+                              placeholder="0"
+                            />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="feel">Tuşe</Label>
+                            <Input 
+                              id="feel" 
+                              {...form.register("feel")}
+                              placeholder="Yumuşak, sert vb."
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="blend">Harman</Label>
+                            <Input 
+                              id="blend" 
+                              {...form.register("blend")}
+                              placeholder="Harman bilgisi"
+                            />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="groupName">Grup Adı</Label>
+                            <Input 
+                              id="groupName" 
+                              {...form.register("groupName")}
+                              placeholder="Kumaş grubu"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="variant">Varyant</Label>
+                            <Input 
+                              id="variant" 
+                              {...form.register("variant")}
+                              placeholder="Varyant bilgisi"
+                            />
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="color">Renk</Label>
+                            <Input 
+                              id="color" 
+                              {...form.register("color")}
+                              placeholder="Renk"
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="pattern">Desen</Label>
+                            <Input 
+                              id="pattern" 
+                              {...form.register("pattern")}
+                              placeholder="Desen detayları"
+                            />
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="notes">Notlar</Label>
+                          <Textarea 
+                            id="notes" 
+                            {...form.register("notes")}
+                            placeholder="Siparişle ilgili özel notlar..."
+                            rows={4}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold mb-4">Ticari Bilgiler</h3>
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="quantity">Miktar</Label>
+                          <div className="flex space-x-2">
+                            <Input 
+                              id="quantity" 
+                              {...form.register("quantity")}
+                              placeholder="0"
+                              className="flex-1"
+                            />
+                            <Select 
+                              onValueChange={(value) => form.setValue("unit", value)}
+                              defaultValue={form.getValues("unit")}
+                            >
+                              <SelectTrigger className="w-32">
+                                <SelectValue placeholder="Birim" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="metre">Metre</SelectItem>
+                                <SelectItem value="kg">Kg</SelectItem>
+                                <SelectItem value="adet">Adet</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          {form.formState.errors.quantity && (
+                            <p className="text-sm text-red-500">{form.formState.errors.quantity.message}</p>
+                          )}
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="unitPrice">Birim Fiyat</Label>
+                          <Input 
+                            id="unitPrice" 
+                            {...form.register("unitPrice")}
+                            placeholder="0.00"
+                          />
+                          {form.formState.errors.unitPrice && (
+                            <p className="text-sm text-red-500">{form.formState.errors.unitPrice.message}</p>
+                          )}
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-end space-x-2 mt-8">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => {
+                        form.reset();
+                        setOrderItems([]);
+                      }}
+                    >
+                      Temizle
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={orderMutation.isPending}
+                    >
+                      {orderMutation.isPending ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Kaydediliyor...
+                        </>
+                      ) : (
+                        <>
+                          <Save className="mr-2 h-4 w-4" />
+                          Kaydet
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="orders">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between">
+              <CardTitle>Siparişler</CardTitle>
+              <div className="flex space-x-2">
+                <Input 
+                  className="w-64"
+                  placeholder="Sipariş ara..." 
+                  // Filtreleme işlemleri ileride eklenebilir
+                />
+                <Select defaultValue="all">
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Filtre" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Tüm Siparişler</SelectItem>
+                    <SelectItem value="pending">Beklemede</SelectItem>
+                    <SelectItem value="production">Üretimde</SelectItem>
+                    <SelectItem value="shipped">Sevkiyat Bekliyor</SelectItem>
+                    <SelectItem value="completed">Tamamlandı</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="border rounded-md">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Sipariş No</TableHead>
+                      <TableHead>Müşteri</TableHead>
+                      <TableHead>Türü</TableHead>
+                      <TableHead>Ürün</TableHead>
+                      <TableHead>Miktar</TableHead>
+                      <TableHead>Tarih</TableHead>
+                      <TableHead>Termin</TableHead>
+                      <TableHead>Durum</TableHead>
+                      <TableHead>Planlama</TableHead>
+                      <TableHead className="text-right">İşlemler</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {orders.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={9} className="text-center text-muted-foreground py-6">
+                          Henüz sipariş bulunmuyor
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      orders.map((order: any) => {
+                        const customer = customers.find((c: any) => c.id === order.customerId);
+                        const fabricType = fabricTypes.find((f: any) => f.id === order.fabricTypeId);
+                        const status = orderStatuses.find((s: any) => s.id === order.statusId);
+                        
+                        // Acil siparişleri belirgin göstermek için stil
+                        const isUrgent = order.isUrgent;
+                        const rowClass = isUrgent ? "bg-red-50" : "";
+                        
+                        return (
+                          <TableRow key={order.id} className={rowClass}>
+                            <TableCell className="font-medium">
+                              {isUrgent && <span className="inline-block px-1.5 py-0.5 text-xs font-medium bg-red-100 text-red-800 rounded-sm mr-1.5">ACİL</span>}
+                              {order.orderNumber}
+                              {order.parentOrderId && (
+                                <div className="text-xs text-gray-500 mt-1">
+                                  Blok sipariş: {orders.find((o: any) => o.id === order.parentOrderId)?.orderNumber || "-"}
+                                </div>
+                              )}
+                            </TableCell>
+                            <TableCell>{customer?.name || "Bilinmeyen Müşteri"}</TableCell>
+                            <TableCell>
+                              {order.orderType === "direct" ? (
+                                <span className="inline-block px-1.5 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 rounded-sm">Doğrudan</span>
+                              ) : order.orderType === "block" ? (
+                                <span className="inline-block px-1.5 py-0.5 text-xs font-medium bg-purple-100 text-purple-800 rounded-sm">Blok</span>
+                              ) : (
+                                <span className="inline-block px-1.5 py-0.5 text-xs font-medium bg-teal-100 text-teal-800 rounded-sm">Blok Renk</span>
+                              )}
+                              {order.marketType === "dış" && (
+                                <span className="inline-block px-1.5 py-0.5 text-xs font-medium bg-amber-100 text-amber-800 rounded-sm ml-1">Dış Piyasa</span>
+                              )}
+                            </TableCell>
+                            <TableCell>{fabricType?.name || "-"}</TableCell>
+                            <TableCell>
+                              <div className="flex flex-col">
+                                <span className="font-medium">{order.quantity}</span>
+                                <span className="text-xs text-gray-500">{order.unit || "metre"}</span>
+                              </div>
+                            </TableCell>
+                            <TableCell>{format(new Date(order.orderDate), "dd.MM.yyyy", { locale: tr })}</TableCell>
+                            <TableCell>
+                              <div className="flex flex-col">
+                                <span>{format(new Date(order.dueDate), "dd.MM.yyyy", { locale: tr })}</span>
+                                {/* Termin tarihine kalan gün sayısını hesapla */}
+                                {(() => {
+                                  const now = new Date();
+                                  const dueDate = new Date(order.dueDate);
+                                  const diffTime = dueDate.getTime() - now.getTime();
+                                  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                                  
+                                  if (diffDays < 0) {
+                                    return <span className="text-xs text-red-600">{Math.abs(diffDays)} gün gecikti</span>;
+                                  } else if (diffDays === 0) {
+                                    return <span className="text-xs text-orange-600">Bugün</span>;
+                                  } else if (diffDays <= 3) {
+                                    return <span className="text-xs text-orange-600">{diffDays} gün kaldı</span>;
+                                  } else {
+                                    return <span className="text-xs text-gray-500">{diffDays} gün kaldı</span>;
+                                  }
+                                })()}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex items-center">
+                                <span
+                                  className="w-3 h-3 rounded-full mr-2"
+                                  style={{ backgroundColor: status?.color || "#CBD5E1" }}
+                                />
+                                <span>{status?.name || "Bilinmeyen"}</span>
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              {status?.code === 'PRODUCTION' ? (
+                                <div className="flex items-center">
+                                  <span className="w-3 h-3 rounded-full mr-2 bg-green-500" />
+                                  <span>Planlandı</span>
+                                </div>
+                              ) : status?.code === 'PENDING' ? (
+                                <div className="flex items-center">
+                                  <span className="w-3 h-3 rounded-full mr-2 bg-yellow-500" />
+                                  <span>Planlanmadı</span>
+                                </div>
+                              ) : (
+                                <div className="flex items-center opacity-50">
+                                  <span className="w-3 h-3 rounded-full mr-2 bg-gray-400" />
+                                  <span>-</span>
+                                </div>
+                              )}
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <div className="flex justify-end gap-1">
+                                <Button 
+                                  size="icon" 
+                                  variant="ghost" 
+                                  title="Görüntüle"
+                                  onClick={() => {
+                                    // İleride siparişi görüntüleme fonksiyonu eklenebilir
+                                  }}
+                                >
+                                  <FileText className="h-4 w-4" />
+                                </Button>
+                                <Button 
+                                  size="icon" 
+                                  variant="ghost" 
+                                  title="Yazdır" 
+                                  onClick={() => {
+                                    window.open(`/sales/print-order/${order.id}`, '_blank');
+                                  }}
+                                >
+                                  <Printer className="h-4 w-4" />
+                                </Button>
+                                <Button 
+                                  size="icon" 
+                                  variant="ghost" 
+                                  title="İstatistikler" 
+                                >
+                                  <BarChart className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })
+                    )}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}

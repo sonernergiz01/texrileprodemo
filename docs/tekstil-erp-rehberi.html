@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tekstil Fabrikası ERP Sistemi: Siparişten Sevkiyata Kapsamlı Rehber</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #1a5276;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 15px;
+        }
+        h2 {
+            color: #2874a6;
+            margin-top: 40px;
+            font-size: 1.8rem;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+        }
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            display: block;
+        }
+        ul {
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .module-box {
+            background-color: #eaf2f8;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #3498db;
+        }
+        .module-box h3 {
+            margin-top: 0;
+            color: #2874a6;
+        }
+        .module-box ul {
+            margin-bottom: 0;
+        }
+        .section-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .highlight {
+            background-color: #f0f8ff;
+            padding: 5px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #1a5276;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tekstil Fabrikası ERP Sistemi: Siparişten Sevkiyata Kapsamlı Rehber</h1>
+    
+    <p>Sistemimiz, bir tekstil fabrikasının tüm süreçlerini bütünleşik ve verimli bir şekilde yönetmek için tasarlanmıştır. Bu makalede, sipariş alımından ürünün sevkiyatına kadar tüm süreçlerin nasıl işlediğini adım adım açıklayacağım.</p>
+
+    <div class="section-container">
+        <h2>1. Sipariş Yönetimi (Satış ve Pazarlama Departmanı)</h2>
+        
+        <img src="https://storage.googleapis.com/replit/images/1683809583259_3aefaa3f7abe1dd3a8a34c13851c64ac.png" alt="Sipariş Yönetimi">
+        
+        <p>Tekstil ERP sistemindeki bir ürünün yolculuğu, satış departmanının bir müşteriden sipariş almasıyla başlar. Bu aşamada:</p>
+        
+        <ul>
+            <li>Satış temsilcisi, sistem üzerinden yeni bir sipariş oluşturur</li>
+            <li>Müşteri bilgileri, istenen ürün detayları, miktar, termin tarihi gibi bilgiler girilir</li>
+            <li>Sipariş fiyatlandırması yapılır ve onay sürecine alınır</li>
+            <li>Onaylanan siparişler, üretim planlama departmanına iletilir</li>
+        </ul>
+        
+        <div class="module-box">
+            <h3>Önemli Modüller:</h3>
+            <ul>
+                <li><span class="highlight">/sales/orders</span>: Tüm siparişlerin listelendiği ana sayfa</li>
+                <li><span class="highlight">/sales/orders/:id</span>: Sipariş detay sayfası</li>
+                <li><span class="highlight">/sales/customers</span>: Müşteri yönetimi sayfası</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2>2. Üretim Planlama (Planlama Departmanı)</h2>
+        
+        <img src="https://storage.googleapis.com/replit/images/1683809675123_67f8d9dc2f8f3b1c09f0b2c4ceb85a08.png" alt="Üretim Planlama">
+        
+        <p>Onaylanan siparişler, planlama departmanı tarafından üretim sürecine hazırlanır:</p>
+        
+        <ul>
+            <li>Planlama uzmanı, siparişi üretim planına dönüştürür</li>
+            <li>Sipariş için gerekli üretim adımları (rota) belirlenir</li>
+            <li>Her adım için süre, kaynak ve departman ataması yapılır</li>
+            <li>Gantt şeması üzerinden üretim çizelgesi oluşturulur</li>
+            <li>Üretim için gereken malzeme ihtiyaçları hesaplanır</li>
+        </ul>
+        
+        <div class="module-box">
+            <h3>Önemli Modüller:</h3>
+            <ul>
+                <li><span class="highlight">/planning/orders</span>: Planlamaya alınacak siparişlerin listelendiği sayfa</li>
+                <li><span class="highlight">/planning/production-steps/:planId?</span>: Üretim adımlarının tanımlandığı sayfa</li>
+                <li><span class="highlight">/planning/route-templates</span>: Üretim rotası şablonlarının yönetildiği sayfa</li>
+                <li><span class="highlight">/planning/planningGantt</span>: Üretim zaman çizelgesinin görselleştirildiği sayfa</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2>3. Üretim Takibi ve Refakat Kartları</h2>
+        
+        <img src="https://storage.googleapis.com/replit/images/1683809764257_6fe6f843dc30a6cde7ca5f0d0dfe9cf4.png" alt="Üretim Takibi">
+        
+        <p>Planlanan siparişlerin üretim sürecinde izlenmesi için refakat kartları oluşturulur:</p>
+        
+        <ul>
+            <li>Her üretim partisi için benzersiz barkodlu refakat kartları oluşturulur</li>
+            <li>Kartlar, ürünün fabrika içindeki hareketini takip etmek için kullanılır</li>
+            <li>Operatörler, refakat kartındaki barkodu okutarak işlemleri kaydeder</li>
+            <li>Ürün bir departmandan diğerine geçtikçe kart hareketleri kaydedilir</li>
+            <li>Üretim yöneticileri, kanban görünümü ile ürünlerin durumunu takip eder</li>
+        </ul>
+        
+        <div class="module-box">
+            <h3>Önemli Modüller:</h3>
+            <ul>
+                <li><span class="highlight">/production-tracking/refakat-cards</span>: Tüm refakat kartlarının listelendiği sayfa</li>
+                <li><span class="highlight">/production-tracking/refakat-card-new</span>: Yeni refakat kartı oluşturma sayfası</li>
+                <li><span class="highlight">/production-tracking/refakat-cards/:id</span>: Refakat kartı detay sayfası</li>
+                <li><span class="highlight">/production-tracking/barcode-scan</span>: Barkod tarama işlemi sayfası</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2>4. İplik ve Dokuma Üretimi</h2>
+        
+        <img src="https://storage.googleapis.com/replit/images/1683809836582_2eb1f3b8f3e85ebd9c57adef2e8a5d47.png" alt="Dokuma">
+        
+        <p>İplik ve dokuma departmanı, kumaş üretiminin temel adımlarını gerçekleştirir:</p>
+        
+        <ul>
+            <li>İplik deposundan gerekli iplikler çekilir</li>
+            <li>Dokuma hazırlık işlemleri gerçekleştirilir (çözgü, haşıl, vb.)</li>
+            <li>Dokuma makinelerinde kumaş dokunur</li>
+            <li>Dokuma işlemi tamamlandığında refakat kartı güncellenir</li>
+            <li>Tamamlanan kumaş topları, bir sonraki işlem için boya veya terbiye bölümüne gönderilir</li>
+        </ul>
+        
+        <div class="module-box">
+            <h3>Önemli Modüller:</h3>
+            <ul>
+                <li><span class="highlight">/weaving/work-orders</span>: Dokuma iş emirlerinin listelendiği sayfa</li>
+                <li><span class="highlight">/weaving/warp-preparation</span>: Çözgü hazırlık işlemlerinin yönetildiği sayfa</li>
+                <li><span class="highlight">/weaving/machines</span>: Dokuma makinelerinin durum ve planlamasının görüntülendiği sayfa</li>
+                <li><span class="highlight">/weaving/production-card/:id</span>: Dokuma üretim kartı detay sayfası</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2>5. Boya ve Terbiye İşlemleri</h2>
+        
+        <img src="https://storage.googleapis.com/replit/images/1683809918342_e57682a7d6c3e4f66b9e2a4a6fb7e9f5.png" alt="Boya ve Terbiye">
+        
+        <p>Dokunan kumaşların istenilen renk ve özelliklere kavuşması için boya ve terbiye işlemleri uygulanır:</p>
+        
+        <ul>
+            <li>Boya uzmanları tarafından boya reçeteleri hazırlanır</li>
+            <li>Boya ve kimyasallar laboratuvarda test edilir</li>
+            <li>Onaylanan reçeteler, üretim için boya bölümüne iletilir</li>
+            <li>Boyama işlemi tamamlandıktan sonra terbiye/apre işlemleri uygulanır</li>
+            <li>Her işlem sonrası refakat kartı güncellenir ve kalite kontrole hazırlanır</li>
+        </ul>
+        
+        <div class="module-box">
+            <h3>Önemli Modüller:</h3>
+            <ul>
+                <li><span class="highlight">/dye-recipes/list</span>: Boya reçetelerinin listelendiği sayfa</li>
+                <li><span class="highlight">/dye-recipes/new</span>: Yeni boya reçetesi oluşturma sayfası</li>
+                <li><span class="highlight">/dye-recipes/chemicals</span>: Kimyasal madde yönetimi sayfası</li>
+                <li><span class="highlight">/finishing/processes</span>: Terbiye/apre işlemlerinin yönetildiği sayfa</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2>6. Kalite Kontrol</h2>
+        
+        <img src="https://storage.googleapis.com/replit/images/1683809969126_4bfb6f53d5f5ae1e3f4c4e8b80c1f12a.png" alt="Kalite Kontrol">
+        
+        <p>Üretimin her aşamasında ve özellikle son ürün aşamasında kalite kontrol işlemleri gerçekleştirilir:</p>
+        
+        <ul>
+            <li>Kumaş topları kalite kontrol departmanına gelir</li>
+            <li>Kumaş genişliği, gramajı, uzunluğu gibi fiziksel özellikler ölçülür</li>
+            <li>COM port üzerinden bağlanan tartı ve metre cihazlarından veri alınır</li>
+            <li>Kumaş topları kalitelerine göre sınıflandırılır (A1, A2, B)</li>
+            <li>Kusurlar kaydedilir ve raporlanır</li>
+            <li>Kalite kontrolü tamamlanan ürünler, depo veya sevkiyat için hazırlanır</li>
+        </ul>
+        
+        <div class="module-box">
+            <h3>Önemli Modüller:</h3>
+            <ul>
+                <li><span class="highlight">/quality/control</span>: Kalite kontrol işlemlerinin yapıldığı ana sayfa</li>
+                <li><span class="highlight">/quality/final-inspection</span>: Son ürün kalite kontrol sayfası</li>
+                <li><span class="highlight">/quality/issues</span>: Kalite sorunlarının kaydedildiği ve izlendiği sayfa</li>
+                <li><span class="highlight">/quality/reports</span>: Kalite raporlarının görüntülendiği sayfa</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2>7. Depo ve Stok Yönetimi</h2>
+        
+        <img src="https://storage.googleapis.com/replit/images/1683810043257_c97ab45f32a2d7bb80a5ef5e7eaeae01.png" alt="Depo ve Stok">
+        
+        <p>Üretimi tamamlanan ürünlerin depolanması ve stok yönetimi bu aşamada gerçekleştirilir:</p>
+        
+        <ul>
+            <li>Kalite kontrolden geçen ürünler depoya alınır</li>
+            <li>Her ürün için barkodlu etiketler oluşturulur</li>
+            <li>Depo içi yerleşim planına göre ürünler yerleştirilir</li>
+            <li>Stok hareketleri ve envanter düzeyleri sürekli takip edilir</li>
+            <li>Sevkiyata hazır ürünler ayrı bir alanda bekletilir</li>
+        </ul>
+        
+        <div class="module-box">
+            <h3>Önemli Modüller:</h3>
+            <ul>
+                <li><span class="highlight">/warehouse/inventory</span>: Depo envanterinin görüntülendiği sayfa</li>
+                <li><span class="highlight">/warehouse/movements</span>: Depo giriş-çıkış hareketlerinin listelendiği sayfa</li>
+                <li><span class="highlight">/warehouse/reports</span>: Stok raporlarının oluşturulduğu sayfa</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2>8. Sevkiyat ve Lojistik</h2>
+        
+        <img src="https://storage.googleapis.com/replit/images/1683810105342_4fd53f8c98f67e3f4c7c5e6e9ad3b2c7.png" alt="Sevkiyat">
+        
+        <p>Sürecin son aşaması olan sevkiyat ve lojistik işlemleri:</p>
+        
+        <ul>
+            <li>Sevkiyat planlaması yapılır ve taşıma şekli belirlenir</li>
+            <li>Sevkiyat için gerekli belgeler hazırlanır (irsaliye, fatura vb.)</li>
+            <li>Ürünler sevkiyat için paketlenir ve etiketlenir</li>
+            <li>Yükleme planı oluşturulur</li>
+            <li>Sevkiyat tamamlandığında, sipariş durumu güncellenir ve müşteriye bilgi verilir</li>
+        </ul>
+        
+        <div class="module-box">
+            <h3>Önemli Modüller:</h3>
+            <ul>
+                <li><span class="highlight">/shipment/planning</span>: Sevkiyat planlamasının yapıldığı sayfa</li>
+                <li><span class="highlight">/shipment/documents</span>: Sevkiyat belgelerinin hazırlandığı sayfa</li>
+                <li><span class="highlight">/shipment/packaging</span>: Paketleme işlemlerinin yönetildiği sayfa</li>
+                <li><span class="highlight">/shipment/tracking</span>: Sevkiyat takibinin yapıldığı sayfa</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2>9. Yönetim ve Raporlama</h2>
+        
+        <img src="https://storage.googleapis.com/replit/images/1683810168423_2a1f3b5c2d1e9f8a7b6c5d4e3f2a1b0.png" alt="Yönetim Dashboard">
+        
+        <p>Sistem, üst yönetim için kapsamlı raporlama ve analiz araçları sunar:</p>
+        
+        <ul>
+            <li>Anlık üretim durumu ve kapasitesi görüntülenir</li>
+            <li>Departman bazlı performans raporları oluşturulur</li>
+            <li>Finansal göstergeler ve maliyet analizleri yapılır</li>
+            <li>Sipariş-üretim-sevkiyat süreleri analiz edilir</li>
+            <li>Verimlilik ölçümleri ve iyileştirme önerileri sunulur</li>
+        </ul>
+        
+        <div class="module-box">
+            <h3>Önemli Modüller:</h3>
+            <ul>
+                <li><span class="highlight">/yonetim/dashboard</span>: Genel durum ve KPI'ların görüntülendiği ana dashboard</li>
+                <li><span class="highlight">/yonetim/finansal-rapor</span>: Finansal raporların oluşturulduğu sayfa</li>
+                <li><span class="highlight">/yonetim/uretim-raporu</span>: Üretim performans raporlarının görüntülendiği sayfa</li>
+                <li><span class="highlight">/yonetim/satis-raporu</span>: Satış analizlerinin yapıldığı sayfa</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2>Sistem Bütünleşik Yapısı ve Bildirim Sistemi</h2>
+        
+        <p>Tüm bu departmanlar ve süreçler arasındaki iletişim, gerçek zamanlı bir bildirim sistemi ile sağlanır:</p>
+        
+        <ul>
+            <li>WebSocket teknolojisi ile anlık bildirimler iletilir</li>
+            <li>Departmanlar arası görev atamaları anlık olarak bildirilir</li>
+            <li>Acil durumlar ve onay gerektiren işlemler için uyarılar gönderilir</li>
+            <li>Kullanıcılar, kendi departmanları ile ilgili bildirimleri alırlar</li>
+            <li>Bildirimler aracılığıyla ilgili sayfalara doğrudan erişim sağlanır</li>
+        </ul>
+        
+        <p>Bu entegre sistem sayesinde, bir tekstil fabrikasının tüm süreçleri kesintisiz ve verimli bir şekilde yönetilir, sipariş alımından sevkiyata kadar her aşama detaylı olarak izlenir ve raporlanır.</p>
+    </div>
+</body>
+</html>

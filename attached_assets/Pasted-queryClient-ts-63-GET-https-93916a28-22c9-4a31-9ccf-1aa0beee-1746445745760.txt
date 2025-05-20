@@ -1,0 +1,134 @@
+queryClient.ts:63 
+            
+            
+           GET https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/api/notifications/admin/notification-stats 500 (Internal Server Error)
+(anonymous) @ queryClient.ts:63
+fetchFn @ @tanstack_react-query.js?v=e1ebbaaa:840
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+onSubscribe @ @tanstack_react-query.js?v=e1ebbaaa:1898
+subscribe @ @tanstack_react-query.js?v=e1ebbaaa:24
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=e1ebbaaa:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=e1ebbaaa:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=e1ebbaaa:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=e1ebbaaa:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=e1ebbaaa:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:19447
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:18868
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=e1ebbaaa:9119
+commitRootImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19432
+commitRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:19277
+finishConcurrentRender @ chunk-RPCDYKBN.js?v=e1ebbaaa:18805
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:18718
+workLoop @ chunk-RPCDYKBN.js?v=e1ebbaaa:197
+flushWork @ chunk-RPCDYKBN.js?v=e1ebbaaa:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=e1ebbaaa:384Understand this error
+queryClient.ts:76 Query Error: 500 Internal Server Error at /api/notifications/admin/notification-stats
+(anonymous) @ queryClient.ts:76
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=e1ebbaaa:840
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+onSubscribe @ @tanstack_react-query.js?v=e1ebbaaa:1898
+subscribe @ @tanstack_react-query.js?v=e1ebbaaa:24
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=e1ebbaaa:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=e1ebbaaa:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=e1ebbaaa:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=e1ebbaaa:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=e1ebbaaa:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:19447
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:18868
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=e1ebbaaa:9119
+commitRootImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19432
+commitRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:19277
+finishConcurrentRender @ chunk-RPCDYKBN.js?v=e1ebbaaa:18805
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:18718
+workLoop @ chunk-RPCDYKBN.js?v=e1ebbaaa:197
+flushWork @ chunk-RPCDYKBN.js?v=e1ebbaaa:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=e1ebbaaa:384Understand this error
+queryClient.ts:78 Error details: {"totalCount":0,"unreadCount":0,"oldestDate":"2025-05-05T11:49:00.022Z","types":[],"byType":[],"byUser":[],"adminNotifications":{"totalCount":0,"unreadCount":0},"error":"typesResult.map is not a function"}
+(anonymous) @ queryClient.ts:78
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=e1ebbaaa:840
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+onSubscribe @ @tanstack_react-query.js?v=e1ebbaaa:1898
+subscribe @ @tanstack_react-query.js?v=e1ebbaaa:24
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=e1ebbaaa:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=e1ebbaaa:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=e1ebbaaa:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=e1ebbaaa:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=e1ebbaaa:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:19447
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:18868
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=e1ebbaaa:9119
+commitRootImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19432
+commitRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:19277
+finishConcurrentRender @ chunk-RPCDYKBN.js?v=e1ebbaaa:18805
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:18718
+workLoop @ chunk-RPCDYKBN.js?v=e1ebbaaa:197
+flushWork @ chunk-RPCDYKBN.js?v=e1ebbaaa:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=e1ebbaaa:384Understand this error
+queryClient.ts:131 Query Request failed: GET /api/notifications/admin/notification-stats TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at throwIfResNotOk (queryClient.ts:5:29)
+    at queryClient.ts:86:13

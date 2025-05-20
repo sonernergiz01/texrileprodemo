@@ -1,0 +1,461 @@
+/**
+ * Etiket Yönetimi API'leri
+ */
+import { Request, Response, Router } from "express";
+import { z } from "zod";
+import { storage } from "../storage";
+
+export const labelsRouter = Router();
+
+/**
+ * Tüm etiket tiplerini listele
+ * İsteğe bağlı olarak departmanId parametresi kullanılabilir
+ */
+labelsRouter.get("/types", async (req: Request, res: Response) => {
+  try {
+    const departmentId = req.query.departmentId ? parseInt(req.query.departmentId as string) : undefined;
+    
+    if (departmentId) {
+      const labelTypes = await storage.getLabelTypesByDepartment(departmentId);
+      return res.json(labelTypes);
+    } else {
+      const labelTypes = await storage.getLabelTypes();
+      return res.json(labelTypes);
+    }
+  } catch (error) {
+    console.error("Etiket tipleri alınırken hata oluştu:", error);
+    return res.status(500).json({ error: "Etiket tipleri alınamadı" });
+  }
+});
+
+/**
+ * Belirli bir etiket tipini getir
+ */
+labelsRouter.get("/types/:id", async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const labelType = await storage.getLabelTypeById(id);
+    
+    if (!labelType) {
+      return res.status(404).json({ error: "Etiket tipi bulunamadı" });
+    }
+    
+    return res.json(labelType);
+  } catch (error) {
+    console.error("Etiket tipi alınırken hata oluştu:", error);
+    return res.status(500).json({ error: "Etiket tipi alınamadı" });
+  }
+});
+
+// Etiket oluşturma schema 
+const createLabelSchema = z.object({
+  name: z.string().min(3, "Etiket adı en az 3 karakter olmalıdır"),
+  type: z.string().min(1, "Etiket türü seçilmelidir"),
+  width: z.string().min(1, "Genişlik gereklidir"),
+  height: z.string().min(1, "Yükseklik gereklidir"),
+  description: z.string().optional(),
+  isQrCode: z.boolean().default(false),
+  content: z.string().min(1, "Etiket içeriği gereklidir"),
+  fields: z.string().min(1, "Etiket alanları gereklidir"),
+  departmentId: z.number().optional()
+});
+
+// Etiket yazdırma schema
+const printLabelSchema = z.object({
+  labelId: z.number().min(1, "Etiket türü seçilmelidir"),
+  quantity: z.number().min(1, "En az 1 adet yazdırılmalıdır").max(100, "En fazla 100 adet yazdırılabilir"),
+  data: z.record(z.string()).optional()
+});
+
+/**
+ * Tüm etiketleri listele
+ * İsteğe bağlı olarak departmanId parametresi kullanılabilir
+ */
+labelsRouter.get("/", async (req: Request, res: Response) => {
+  try {
+    const departmentId = req.query.departmentId ? parseInt(req.query.departmentId as string) : undefined;
+    
+    if (departmentId) {
+      const labels = await storage.getLabelsByDepartment(departmentId);
+      return res.json(labels);
+    } else {
+      const labels = await storage.getAllLabels();
+      return res.json(labels);
+    }
+  } catch (error) {
+    console.error("Etiket listesi alınırken hata oluştu:", error);
+    return res.status(500).json({ error: "Etiket listesi alınamadı" });
+  }
+});
+
+/**
+ * Belirli bir etiketi getir
+ */
+labelsRouter.get("/:id", async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const label = await storage.getLabelById(id);
+    
+    if (!label) {
+      return res.status(404).json({ error: "Etiket bulunamadı" });
+    }
+    
+    return res.json(label);
+  } catch (error) {
+    console.error("Etiket alınırken hata oluştu:", error);
+    return res.status(500).json({ error: "Etiket alınamadı" });
+  }
+});
+
+/**
+ * Yeni etiket oluştur
+ */
+labelsRouter.post("/", async (req: Request, res: Response) => {
+  try {
+    const validatedData = createLabelSchema.parse(req.body);
+    
+    // fields JSON string olduğundan, geçerli olup olmadığını kontrol et
+    try {
+      JSON.parse(validatedData.fields);
+    } catch (err) {
+      return res.status(400).json({ error: "Fields alanı geçerli bir JSON formatında olmalıdır" });
+    }
+    
+    // Departman kontrolü - departmentId girilmişse geçerli olup olmadığını kontrol et
+    if (validatedData.departmentId) {
+      const department = await storage.getDepartmentById(validatedData.departmentId);
+      if (!department) {
+        return res.status(400).json({ error: "Geçersiz departman ID'si" });
+      }
+    }
+    
+    const newLabel = await storage.createLabel({
+      ...validatedData,
+      createdBy: req.user?.id
+    });
+    
+    // Bildirim gönderme - Admin kullanıcılara bildirim gönder
+    try {
+      const sendNotificationToUser = (global as any).sendNotificationToUser;
+      if (typeof sendNotificationToUser === 'function') {
+        // Admin rolüne sahip kullanıcıları al
+        const adminUsers = await storage.getUsersByRole("Admin");
+        
+        // Her admin kullanıcıya bildirim gönder
+        for (const user of adminUsers) {
+          await sendNotificationToUser(user.id, {
+            title: "Yeni Etiket Oluşturuldu",
+            content: `${req.user?.fullName || 'Bir kullanıcı'} tarafından "${newLabel.name}" etiketi oluşturuldu.`,
+            type: "info",
+            entityType: "labels",
+            entityId: newLabel.id
+          });
+        }
+      }
+    } catch (notificationError) {
+      console.error("Bildirim gönderilirken hata oluştu:", notificationError);
+      // Bildirim hatası nedeniyle işlemi durdurmuyoruz
+    }
+    
+    return res.status(201).json(newLabel);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ error: error.errors });
+    }
+    console.error("Etiket oluşturulurken hata oluştu:", error);
+    return res.status(500).json({ error: "Etiket oluşturulamadı" });
+  }
+});
+
+/**
+ * Etiket güncelle
+ */
+labelsRouter.put("/:id", async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    const validatedData = createLabelSchema.parse(req.body);
+    
+    // Etiketin var olup olmadığını kontrol et
+    const existingLabel = await storage.getLabelById(id);
+    if (!existingLabel) {
+      return res.status(404).json({ error: "Etiket bulunamadı" });
+    }
+    
+    // Departman yetkisi kontrolü
+    // Admin değilse ve etiket başka departmana aitse işlemi engelle
+    if (req.user && !req.user.roles?.includes("Admin")) {
+      const userDepartment = await storage.getDepartmentById(req.user.departmentId);
+      if (existingLabel.departmentId !== req.user.departmentId) {
+        return res.status(403).json({ 
+          error: "Bu etiketi düzenleme yetkiniz bulunmamaktadır. Sadece kendi departmanınıza ait etiketleri düzenleyebilirsiniz." 
+        });
+      }
+    }
+    
+    // fields JSON string olduğundan, geçerli olup olmadığını kontrol et
+    try {
+      JSON.parse(validatedData.fields);
+    } catch (err) {
+      return res.status(400).json({ error: "Fields alanı geçerli bir JSON formatında olmalıdır" });
+    }
+    
+    const updatedLabel = await storage.updateLabel(id, {
+      ...validatedData,
+      updatedBy: req.user?.id
+    });
+    
+    // Bildirim gönderme - ilgili departman yöneticisine ve admin kullanıcılara bildirim gönder
+    try {
+      const sendNotificationToUser = (global as any).sendNotificationToUser;
+      if (typeof sendNotificationToUser === 'function') {
+        // Admin rolüne sahip kullanıcıları al
+        const adminUsers = await storage.getUsersByRole("Admin");
+        
+        // Her admin kullanıcıya bildirim gönder
+        for (const user of adminUsers) {
+          await sendNotificationToUser(user.id, {
+            title: "Etiket Güncellendi",
+            content: `${req.user?.fullName || 'Bir kullanıcı'} tarafından "${updatedLabel.name}" etiketi güncellendi.`,
+            type: "info",
+            entityType: "labels",
+            entityId: updatedLabel.id
+          });
+        }
+        
+        // Departman yöneticisine bildirim gönder (admin değilse)
+        if (updatedLabel.departmentId) {
+          const departmentManagers = await storage.getUsersByDepartmentAndRole(updatedLabel.departmentId, "Manager");
+          for (const manager of departmentManagers) {
+            // Kişi zaten admin olarak bildirim almadıysa gönder
+            if (!adminUsers.some(admin => admin.id === manager.id)) {
+              await sendNotificationToUser(manager.id, {
+                title: "Departman Etiketi Güncellendi",
+                content: `${req.user?.fullName || 'Bir kullanıcı'} tarafından departmanınıza ait "${updatedLabel.name}" etiketi güncellendi.`,
+                type: "info",
+                entityType: "labels",
+                entityId: updatedLabel.id
+              });
+            }
+          }
+        }
+      }
+    } catch (notificationError) {
+      console.error("Bildirim gönderilirken hata oluştu:", notificationError);
+      // Bildirim hatası nedeniyle işlemi durdurmuyoruz
+    }
+    
+    return res.json(updatedLabel);
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ error: error.errors });
+    }
+    console.error("Etiket güncellenirken hata oluştu:", error);
+    return res.status(500).json({ error: "Etiket güncellenemedi" });
+  }
+});
+
+/**
+ * Etiket sil
+ */
+labelsRouter.delete("/:id", async (req: Request, res: Response) => {
+  try {
+    const id = parseInt(req.params.id);
+    
+    // Etiketin var olup olmadığını kontrol et
+    const existingLabel = await storage.getLabelById(id);
+    if (!existingLabel) {
+      return res.status(404).json({ error: "Etiket bulunamadı" });
+    }
+    
+    // Departman yetkisi kontrolü
+    // Admin değilse ve etiket başka departmana aitse işlemi engelle
+    if (req.user && !req.user.roles?.includes("Admin")) {
+      const userDepartment = await storage.getDepartmentById(req.user.departmentId);
+      if (existingLabel.departmentId !== req.user.departmentId) {
+        return res.status(403).json({ 
+          error: "Bu etiketi silme yetkiniz bulunmamaktadır. Sadece kendi departmanınıza ait etiketleri silebilirsiniz." 
+        });
+      }
+    }
+    
+    // Etiket adını ve departmanını sakla (bildirim için)
+    const labelName = existingLabel.name;
+    const departmentId = existingLabel.departmentId;
+    
+    // Etiketi sil
+    await storage.deleteLabel(id);
+    
+    // Bildirim gönderme - ilgili departman yöneticisine ve admin kullanıcılara bildirim gönder
+    try {
+      const sendNotificationToUser = (global as any).sendNotificationToUser;
+      if (typeof sendNotificationToUser === 'function') {
+        // Admin rolüne sahip kullanıcılara bildirim gönder
+        const adminUsers = await storage.getUsersByRole("Admin");
+        
+        // Her admin kullanıcıya bildirim gönder
+        for (const user of adminUsers) {
+          await sendNotificationToUser(user.id, {
+            title: "Etiket Silindi",
+            content: `${req.user?.fullName || 'Bir kullanıcı'} tarafından "${labelName}" etiketi silindi.`,
+            type: "warning",
+            entityType: "labels",
+            entityId: null
+          });
+        }
+        
+        // Departman yöneticisine bildirim gönder (admin değilse)
+        if (departmentId) {
+          const departmentManagers = await storage.getUsersByDepartmentAndRole(departmentId, "Manager");
+          for (const manager of departmentManagers) {
+            // Kişi zaten admin olarak bildirim almadıysa gönder
+            if (!adminUsers.some(admin => admin.id === manager.id)) {
+              await sendNotificationToUser(manager.id, {
+                title: "Departman Etiketi Silindi",
+                content: `${req.user?.fullName || 'Bir kullanıcı'} tarafından departmanınıza ait "${labelName}" etiketi silindi.`,
+                type: "warning",
+                entityType: "labels",
+                entityId: null
+              });
+            }
+          }
+        }
+      }
+    } catch (notificationError) {
+      console.error("Bildirim gönderilirken hata oluştu:", notificationError);
+      // Bildirim hatası nedeniyle işlemi durdurmuyoruz
+    }
+    
+    return res.json({ success: true, message: "Etiket başarıyla silindi" });
+  } catch (error) {
+    console.error("Etiket silinirken hata oluştu:", error);
+    return res.status(500).json({ error: "Etiket silinemedi" });
+  }
+});
+
+/**
+ * Etiket yazdırma
+ */
+labelsRouter.post("/print", async (req: Request, res: Response) => {
+  try {
+    const validatedData = printLabelSchema.parse(req.body);
+    
+    // Etiketin var olup olmadığını kontrol et
+    const label = await storage.getLabelById(validatedData.labelId);
+    if (!label) {
+      return res.status(404).json({ error: "Etiket bulunamadı" });
+    }
+    
+    // Departman yetkisi kontrolü
+    // Admin değilse ve etiket başka departmana aitse işlemi engelle
+    if (req.user && !req.user.roles?.includes("Admin")) {
+      const userDepartment = await storage.getDepartmentById(req.user.departmentId);
+      if (label.departmentId && label.departmentId !== req.user.departmentId) {
+        return res.status(403).json({ 
+          error: "Bu etiketi yazdırma yetkiniz bulunmamaktadır. Sadece kendi departmanınıza ait etiketleri yazdırabilirsiniz." 
+        });
+      }
+    }
+    
+    // Etiket yazdırma kaydı oluştur
+    const printRecord = await storage.createLabelPrintRecord({
+      labelId: validatedData.labelId,
+      userId: req.user?.id,
+      quantity: validatedData.quantity,
+      data: validatedData.data || {}
+    });
+    
+    // Bildirim oluştur
+    try {
+      if (req.user) {
+        const sendNotificationToUser = (global as any).sendNotificationToUser;
+        if (typeof sendNotificationToUser === 'function') {
+          // Departman yöneticisine bildirim gönder
+          const departmentId = label.departmentId;
+          if (departmentId) {
+            const departmentManagers = await storage.getUsersByDepartmentAndRole(departmentId, "Manager");
+            for (const manager of departmentManagers) {
+              // Kişinin kendisi değilse bildirim gönder
+              if (manager.id !== req.user.id) {
+                await sendNotificationToUser(manager.id, {
+                  title: "Etiket Yazdırıldı",
+                  content: `${req.user.fullName} tarafından "${label.name}" etiketi ${validatedData.quantity} adet yazdırıldı.`,
+                  type: "info",
+                  entityType: "label_prints",
+                  entityId: printRecord.id
+                });
+              }
+            }
+          }
+        }
+      }
+    } catch (notificationError) {
+      console.error("Bildirim gönderilirken hata oluştu:", notificationError);
+      // Bildirim hatası işlemi durdurmaz
+    }
+    
+    // Başarılı yanıt dön
+    return res.status(201).json({
+      id: printRecord.id,
+      label,
+      quantity: printRecord.quantity,
+      data: printRecord.data,
+      createdAt: printRecord.createdAt
+    });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ error: error.errors });
+    }
+    console.error("Etiket yazdırma hatası:", error);
+    return res.status(500).json({ error: "Etiket yazdırılamadı" });
+  }
+});
+
+/**
+ * Etiket yazdırma geçmişi
+ * Admin tüm geçmişi görebilir, diğer kullanıcılar sadece kendi departmanları ile ilgili etiketleri görebilir
+ */
+labelsRouter.get("/print-history", async (req: Request, res: Response) => {
+  try {
+    // Departman filtresi ekleme
+    let printHistory;
+    
+    // Admin tüm geçmişi görebilir
+    if (req.user && req.user.roles?.includes("Admin")) {
+      printHistory = await storage.getLabelPrintHistory();
+    } else if (req.user) {
+      // Diğer kullanıcılar sadece kendi departmanlarının etiketlerini görebilir
+      const userDepartmentId = req.user.departmentId;
+      printHistory = await storage.getLabelPrintHistoryByDepartment(userDepartmentId);
+    } else {
+      return res.status(401).json({ error: "Bu işlem için giriş yapmanız gerekmektedir" });
+    }
+    
+    return res.json(printHistory);
+  } catch (error) {
+    console.error("Yazdırma geçmişi alınırken hata oluştu:", error);
+    return res.status(500).json({ error: "Yazdırma geçmişi alınamadı" });
+  }
+});
+
+/**
+ * Tüm admin kullanıcılara bildirim gönder - Bildirim servisini ekledikten sonra kullanılabilir
+ */
+// async function sendNotificationToAdmins(title: string, content: string, entityType: string) {
+//   try {
+//     // Admin rolüne sahip kullanıcıları al
+//     const adminUsers = await storage.getUsersByRole("Admin");
+//     
+//     // Her admin kullanıcıya bildirim gönder
+//     for (const user of adminUsers) {
+//       await sendNotificationToUserFunction(user.id, {
+//         title,
+//         content,
+//         type: "info",
+//         entityType,
+//         entityId: null
+//       });
+//     }
+//   } catch (error) {
+//     console.error("Admin kullanıcılara bildirim gönderilirken hata oluştu:", error);
+//   }
+// }

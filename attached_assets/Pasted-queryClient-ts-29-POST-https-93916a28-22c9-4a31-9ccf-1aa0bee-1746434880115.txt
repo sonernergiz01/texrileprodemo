@@ -1,0 +1,125 @@
+queryClient.ts:29 
+            
+            
+           POST https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/api/orders 400 (Bad Request)
+apiRequest @ queryClient.ts:29
+mutationFn @ add-child-order.tsx:110
+fn @ @tanstack_react-query.js?v=e1ebbaaa:1189
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+execute @ @tanstack_react-query.js?v=e1ebbaaa:1225
+await in execute
+mutate @ @tanstack_react-query.js?v=e1ebbaaa:2630
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3295
+onSubmit @ add-child-order.tsx:160
+(anonymous) @ chunk-MGW4VB6R.js?v=e1ebbaaa:1469
+await in (anonymous)
+callCallback2 @ chunk-RPCDYKBN.js?v=e1ebbaaa:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=e1ebbaaa:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=e1ebbaaa:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=e1ebbaaa:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=e1ebbaaa:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=e1ebbaaa:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=e1ebbaaa:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=e1ebbaaa:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=e1ebbaaa:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=e1ebbaaa:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=e1ebbaaa:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=e1ebbaaa:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=e1ebbaaa:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=e1ebbaaa:5472
+dispatchDiscreteEvent @ chunk-RPCDYKBN.js?v=e1ebbaaa:5449Understand this error
+queryClient.ts:37 API Error: 400 Bad Request at /api/orders
+apiRequest @ queryClient.ts:37
+await in apiRequest
+mutationFn @ add-child-order.tsx:110
+fn @ @tanstack_react-query.js?v=e1ebbaaa:1189
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+execute @ @tanstack_react-query.js?v=e1ebbaaa:1225
+await in execute
+mutate @ @tanstack_react-query.js?v=e1ebbaaa:2630
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3295
+onSubmit @ add-child-order.tsx:160
+(anonymous) @ chunk-MGW4VB6R.js?v=e1ebbaaa:1469
+await in (anonymous)
+callCallback2 @ chunk-RPCDYKBN.js?v=e1ebbaaa:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=e1ebbaaa:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=e1ebbaaa:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=e1ebbaaa:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=e1ebbaaa:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=e1ebbaaa:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=e1ebbaaa:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=e1ebbaaa:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=e1ebbaaa:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=e1ebbaaa:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=e1ebbaaa:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=e1ebbaaa:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=e1ebbaaa:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=e1ebbaaa:5472
+dispatchDiscreteEvent @ chunk-RPCDYKBN.js?v=e1ebbaaa:5449Understand this error
+queryClient.ts:39 Error details: {"message":"duplicate key value violates unique constraint \"orders_order_number_unique\""}
+apiRequest @ queryClient.ts:39
+await in apiRequest
+mutationFn @ add-child-order.tsx:110
+fn @ @tanstack_react-query.js?v=e1ebbaaa:1189
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+execute @ @tanstack_react-query.js?v=e1ebbaaa:1225
+await in execute
+mutate @ @tanstack_react-query.js?v=e1ebbaaa:2630
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3295
+onSubmit @ add-child-order.tsx:160
+(anonymous) @ chunk-MGW4VB6R.js?v=e1ebbaaa:1469
+await in (anonymous)
+callCallback2 @ chunk-RPCDYKBN.js?v=e1ebbaaa:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=e1ebbaaa:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=e1ebbaaa:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=e1ebbaaa:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=e1ebbaaa:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=e1ebbaaa:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=e1ebbaaa:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=e1ebbaaa:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=e1ebbaaa:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=e1ebbaaa:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=e1ebbaaa:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=e1ebbaaa:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=e1ebbaaa:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=e1ebbaaa:5472
+dispatchDiscreteEvent @ chunk-RPCDYKBN.js?v=e1ebbaaa:5449Understand this error
+queryClient.ts:50 API Request failed: POST /api/orders TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at throwIfResNotOk (queryClient.ts:5:29)
+    at apiRequest (queryClient.ts:47:11)
+    at async Object.mutationFn (add-child-order.tsx:110:24)
+apiRequest @ queryClient.ts:50
+await in apiRequest
+mutationFn @ add-child-order.tsx:110
+fn @ @tanstack_react-query.js?v=e1ebbaaa:1189
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+execute @ @tanstack_react-query.js?v=e1ebbaaa:1225
+await in execute
+mutate @ @tanstack_react-query.js?v=e1ebbaaa:2630
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3295
+onSubmit @ add-child-order.tsx:160
+(anonymous) @ chunk-MGW4VB6R.js?v=e1ebbaaa:1469
+await in (anonymous)
+callCallback2 @ chunk-RPCDYKBN.js?v=e1ebbaaa:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=e1ebbaaa:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=e1ebbaaa:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=e1ebbaaa:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=e1ebbaaa:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=e1ebbaaa:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=e1ebbaaa:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=e1ebbaaa:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=e1ebbaaa:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=e1ebbaaa:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=e1ebbaaa:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=e1ebbaaa:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=e1ebbaaa:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=e1ebbaaa:5472
+dispatchDiscreteEvent @ chunk-RPCDYKBN.js?v=e1ebbaaa:5449Understand this error
+add-child-order.tsx:127 Sipariş oluşturma hatası: TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at throwIfResNotOk (queryClient.ts:5:29)
+    at apiRequest (queryClient.ts:47:11)
+    at async Object.mutationFn (add-child-order.tsx:110:24)

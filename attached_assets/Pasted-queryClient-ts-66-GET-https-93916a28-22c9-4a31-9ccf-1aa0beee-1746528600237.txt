@@ -1,0 +1,253 @@
+queryClient.ts:66 
+            
+            
+           GET https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/api/production-tracking/production-cards 500 (Internal Server Error)
+(anonymous) @ queryClient.ts:66
+fetchFn @ @tanstack_react-query.js?v=66b2a405:840
+run @ @tanstack_react-query.js?v=66b2a405:494
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:515
+Promise.catch
+run @ @tanstack_react-query.js?v=66b2a405:498
+start @ @tanstack_react-query.js?v=66b2a405:536
+fetch @ @tanstack_react-query.js?v=66b2a405:926
+executeFetch_fn @ @tanstack_react-query.js?v=66b2a405:2211
+onSubscribe @ @tanstack_react-query.js?v=66b2a405:1898
+subscribe @ @tanstack_react-query.js?v=66b2a405:24
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=66b2a405:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=66b2a405:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=66b2a405:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=66b2a405:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=66b2a405:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=66b2a405:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=66b2a405:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=66b2a405:19447
+commitRootImpl @ chunk-RPCDYKBN.js?v=66b2a405:19416
+commitRoot @ chunk-RPCDYKBN.js?v=66b2a405:19277
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18895
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=66b2a405:9119
+(anonymous) @ chunk-RPCDYKBN.js?v=66b2a405:18627
+setTimeout
+scheduleFn @ @tanstack_react-query.js?v=66b2a405:555
+flush @ @tanstack_react-query.js?v=66b2a405:569
+batch @ @tanstack_react-query.js?v=66b2a405:587
+dispatch_fn @ @tanstack_react-query.js?v=66b2a405:996
+setData @ @tanstack_react-query.js?v=66b2a405:696
+onSuccess @ @tanstack_react-query.js?v=66b2a405:897
+resolve @ @tanstack_react-query.js?v=66b2a405:456
+Promise.then
+run @ @tanstack_react-query.js?v=66b2a405:498
+start @ @tanstack_react-query.js?v=66b2a405:536
+fetch @ @tanstack_react-query.js?v=66b2a405:926
+executeFetch_fn @ @tanstack_react-query.js?v=66b2a405:2211
+onSubscribe @ @tanstack_react-query.js?v=66b2a405:1898
+subscribe @ @tanstack_react-query.js?v=66b2a405:24
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=66b2a405:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=66b2a405:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=66b2a405:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=66b2a405:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=66b2a405:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=66b2a405:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=66b2a405:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=66b2a405:19447
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18868
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=66b2a405:9119
+commitRootImpl @ chunk-RPCDYKBN.js?v=66b2a405:19432
+commitRoot @ chunk-RPCDYKBN.js?v=66b2a405:19277
+finishConcurrentRender @ chunk-RPCDYKBN.js?v=66b2a405:18805
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18718
+workLoop @ chunk-RPCDYKBN.js?v=66b2a405:197
+flushWork @ chunk-RPCDYKBN.js?v=66b2a405:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=66b2a405:384Understand this error
+queryClient.ts:79 Query Error: 500 Internal Server Error at /api/production-tracking/production-cards
+(anonymous) @ queryClient.ts:79
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=66b2a405:840
+run @ @tanstack_react-query.js?v=66b2a405:494
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:515
+Promise.catch
+run @ @tanstack_react-query.js?v=66b2a405:498
+start @ @tanstack_react-query.js?v=66b2a405:536
+fetch @ @tanstack_react-query.js?v=66b2a405:926
+executeFetch_fn @ @tanstack_react-query.js?v=66b2a405:2211
+onSubscribe @ @tanstack_react-query.js?v=66b2a405:1898
+subscribe @ @tanstack_react-query.js?v=66b2a405:24
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=66b2a405:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=66b2a405:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=66b2a405:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=66b2a405:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=66b2a405:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=66b2a405:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=66b2a405:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=66b2a405:19447
+commitRootImpl @ chunk-RPCDYKBN.js?v=66b2a405:19416
+commitRoot @ chunk-RPCDYKBN.js?v=66b2a405:19277
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18895
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=66b2a405:9119
+(anonymous) @ chunk-RPCDYKBN.js?v=66b2a405:18627
+setTimeout
+scheduleFn @ @tanstack_react-query.js?v=66b2a405:555
+flush @ @tanstack_react-query.js?v=66b2a405:569
+batch @ @tanstack_react-query.js?v=66b2a405:587
+dispatch_fn @ @tanstack_react-query.js?v=66b2a405:996
+setData @ @tanstack_react-query.js?v=66b2a405:696
+onSuccess @ @tanstack_react-query.js?v=66b2a405:897
+resolve @ @tanstack_react-query.js?v=66b2a405:456
+Promise.then
+run @ @tanstack_react-query.js?v=66b2a405:498
+start @ @tanstack_react-query.js?v=66b2a405:536
+fetch @ @tanstack_react-query.js?v=66b2a405:926
+executeFetch_fn @ @tanstack_react-query.js?v=66b2a405:2211
+onSubscribe @ @tanstack_react-query.js?v=66b2a405:1898
+subscribe @ @tanstack_react-query.js?v=66b2a405:24
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=66b2a405:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=66b2a405:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=66b2a405:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=66b2a405:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=66b2a405:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=66b2a405:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=66b2a405:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=66b2a405:19447
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18868
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=66b2a405:9119
+commitRootImpl @ chunk-RPCDYKBN.js?v=66b2a405:19432
+commitRoot @ chunk-RPCDYKBN.js?v=66b2a405:19277
+finishConcurrentRender @ chunk-RPCDYKBN.js?v=66b2a405:18805
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18718
+workLoop @ chunk-RPCDYKBN.js?v=66b2a405:197
+flushWork @ chunk-RPCDYKBN.js?v=66b2a405:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=66b2a405:384Understand this error
+queryClient.ts:81 Error details: {"message":"Refakat kartları listelenirken bir hata oluştu","error":"error: syntax error at or near \"=\""}
+(anonymous) @ queryClient.ts:81
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=66b2a405:840
+run @ @tanstack_react-query.js?v=66b2a405:494
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:515
+Promise.catch
+run @ @tanstack_react-query.js?v=66b2a405:498
+start @ @tanstack_react-query.js?v=66b2a405:536
+fetch @ @tanstack_react-query.js?v=66b2a405:926
+executeFetch_fn @ @tanstack_react-query.js?v=66b2a405:2211
+onSubscribe @ @tanstack_react-query.js?v=66b2a405:1898
+subscribe @ @tanstack_react-query.js?v=66b2a405:24
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=66b2a405:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=66b2a405:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=66b2a405:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=66b2a405:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=66b2a405:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=66b2a405:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=66b2a405:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=66b2a405:19447
+commitRootImpl @ chunk-RPCDYKBN.js?v=66b2a405:19416
+commitRoot @ chunk-RPCDYKBN.js?v=66b2a405:19277
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18895
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=66b2a405:9119
+(anonymous) @ chunk-RPCDYKBN.js?v=66b2a405:18627
+setTimeout
+scheduleFn @ @tanstack_react-query.js?v=66b2a405:555
+flush @ @tanstack_react-query.js?v=66b2a405:569
+batch @ @tanstack_react-query.js?v=66b2a405:587
+dispatch_fn @ @tanstack_react-query.js?v=66b2a405:996
+setData @ @tanstack_react-query.js?v=66b2a405:696
+onSuccess @ @tanstack_react-query.js?v=66b2a405:897
+resolve @ @tanstack_react-query.js?v=66b2a405:456
+Promise.then
+run @ @tanstack_react-query.js?v=66b2a405:498
+start @ @tanstack_react-query.js?v=66b2a405:536
+fetch @ @tanstack_react-query.js?v=66b2a405:926
+executeFetch_fn @ @tanstack_react-query.js?v=66b2a405:2211
+onSubscribe @ @tanstack_react-query.js?v=66b2a405:1898
+subscribe @ @tanstack_react-query.js?v=66b2a405:24
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=66b2a405:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=66b2a405:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=66b2a405:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=66b2a405:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=66b2a405:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=66b2a405:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=66b2a405:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=66b2a405:19447
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18868
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=66b2a405:9119
+commitRootImpl @ chunk-RPCDYKBN.js?v=66b2a405:19432
+commitRoot @ chunk-RPCDYKBN.js?v=66b2a405:19277
+finishConcurrentRender @ chunk-RPCDYKBN.js?v=66b2a405:18805
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18718
+workLoop @ chunk-RPCDYKBN.js?v=66b2a405:197
+flushWork @ chunk-RPCDYKBN.js?v=66b2a405:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=66b2a405:384Understand this error
+queryClient.ts:118 API yanıtı işlenirken kritik hata: TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at queryClient.ts:108:34
+(anonymous) @ queryClient.ts:118
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=66b2a405:840
+run @ @tanstack_react-query.js?v=66b2a405:494
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:515
+Promise.catch
+run @ @tanstack_react-query.js?v=66b2a405:498
+start @ @tanstack_react-query.js?v=66b2a405:536
+fetch @ @tanstack_react-query.js?v=66b2a405:926
+executeFetch_fn @ @tanstack_react-query.js?v=66b2a405:2211
+onSubscribe @ @tanstack_react-query.js?v=66b2a405:1898
+subscribe @ @tanstack_react-query.js?v=66b2a405:24
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=66b2a405:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=66b2a405:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=66b2a405:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=66b2a405:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=66b2a405:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=66b2a405:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=66b2a405:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=66b2a405:19447
+commitRootImpl @ chunk-RPCDYKBN.js?v=66b2a405:19416
+commitRoot @ chunk-RPCDYKBN.js?v=66b2a405:19277
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18895
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=66b2a405:9119
+(anonymous) @ chunk-RPCDYKBN.js?v=66b2a405:18627
+setTimeout
+scheduleFn @ @tanstack_react-query.js?v=66b2a405:555
+flush @ @tanstack_react-query.js?v=66b2a405:569
+batch @ @tanstack_react-query.js?v=66b2a405:587
+dispatch_fn @ @tanstack_react-query.js?v=66b2a405:996
+setData @ @tanstack_react-query.js?v=66b2a405:696
+onSuccess @ @tanstack_react-query.js?v=66b2a405:897
+resolve @ @tanstack_react-query.js?v=66b2a405:456
+Promise.then
+run @ @tanstack_react-query.js?v=66b2a405:498
+start @ @tanstack_react-query.js?v=66b2a405:536
+fetch @ @tanstack_react-query.js?v=66b2a405:926
+executeFetch_fn @ @tanstack_react-query.js?v=66b2a405:2211
+onSubscribe @ @tanstack_react-query.js?v=66b2a405:1898
+subscribe @ @tanstack_react-query.js?v=66b2a405:24
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=66b2a405:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=66b2a405:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=66b2a405:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=66b2a405:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=66b2a405:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=66b2a405:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=66b2a405:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=66b2a405:19447
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18868
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=66b2a405:9119
+commitRootImpl @ chunk-RPCDYKBN.js?v=66b2a405:19432
+commitRoot @ chunk-RPCDYKBN.js?v=66b2a405:19277
+finishConcurrentRender @ chunk-RPCDYKBN.js?v=66b2a405:18805
+performConcurrentWorkOnRoot @ chunk-RPCDYKBN.js?v=66b2a405:18718
+workLoop @ chunk-RPCDYKBN.js?v=66b2a405:197
+flushWork @ chunk-RPCDYKBN.js?v=66b2a405:176
+performWorkUntilDeadline @ chunk-RPCDYKBN.js?v=66b2a405:384Understand this error
+queryClient.ts:122 Query Request failed: GET /api/production-tracking/production-cards TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at queryClient.ts:108:34

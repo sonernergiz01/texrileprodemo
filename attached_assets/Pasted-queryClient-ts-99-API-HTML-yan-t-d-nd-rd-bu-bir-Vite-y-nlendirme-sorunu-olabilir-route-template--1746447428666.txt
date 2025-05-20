@@ -1,0 +1,60 @@
+queryClient.ts:99 API HTML yanıt döndürdü - bu bir Vite yönlendirme sorunu olabilir
+route-template-steps.tsx:102 Template ID params: 
+{0: '5', id: '5'}
+route-template-steps.tsx:104 Template ID: 5
+use-notifications.tsx:112 WebSocket bağlantısı kuruldu
+route-template-steps.tsx:102 Template ID params: 
+{0: '5', id: '5'}
+route-template-steps.tsx:104 Template ID: 5
+route-template-steps.tsx:721 Uncaught TypeError: machines.map is not a function
+    at Object.render (route-template-steps.tsx:721:35)
+route-template-steps.tsx:721 Uncaught TypeError: machines.map is not a function
+    at Object.render (route-template-steps.tsx:721:35)
+chunk-RPCDYKBN.js?v=e1ebbaaa:14032 The above error occurred in the <Controller> component:
+
+    at Controller (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…nner/workspace/node_modules/.vite/deps/chunk-MGW4VB6R.js?v=e1ebbaaa:328:35)
+    at FormField (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/components/ui/form.tsx:33:6)
+    at form
+    at FormProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…nner/workspace/node_modules/.vite/deps/chunk-MGW4VB6R.js?v=e1ebbaaa:103:11)
+    at div
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=e1ebbaaa:42:13
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…runner/workspace/node_modules/.vite/deps/chunk-G76BAGTM.js?v=e1ebbaaa:61:7
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=e1ebbaaa:79:13
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=e1ebbaaa:56:13
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=e1ebbaaa:42:13
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…runner/workspace/node_modules/.vite/deps/chunk-DUCXC5SA.js?v=e1ebbaaa:29:5
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…nner/workspace/node_modules/.vite/deps/chunk-CNGIH7RH.js?v=e1ebbaaa:235:13
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…nner/workspace/node_modules/.vite/deps/chunk-CNGIH7RH.js?v=e1ebbaaa:158:58
+    at Presence (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-E4UC4BFD.js?v=e1ebbaaa:24:11)
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…nner/workspace/node_modules/.vite/deps/chunk-CNGIH7RH.js?v=e1ebbaaa:149:64
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=e1ebbaaa:79:13
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-2K77HOHX.js?v=e1ebbaaa:56:13
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-AXMZZQ2X.js?v=e1ebbaaa:42:13
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…nner/workspace/node_modules/.vite/deps/chunk-G76BAGTM.js?v=e1ebbaaa:260:22
+    at Presence (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-E4UC4BFD.js?v=e1ebbaaa:24:11)
+    at Provider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=e1ebbaaa:38:15)
+    at DialogPortal (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…nner/workspace/node_modules/.vite/deps/chunk-CNGIH7RH.js?v=e1ebbaaa:111:11)
+    at _c3 (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/components/ui/dialog.tsx:52:12)
+    at Provider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=e1ebbaaa:38:15)
+    at Dialog (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…runner/workspace/node_modules/.vite/deps/chunk-CNGIH7RH.js?v=e1ebbaaa:52:5)
+    at div
+    at RouteTemplateStepsPage (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/pages/planning/route-template-steps.tsx?t=1746447293399:91:41)
+    at main
+    at div
+    at div
+    at AppLayout (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/components/layout/app-layout.tsx:21:29)
+    at Route (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=e1ebbaaa:265:16)
+    at ProtectedRoute (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/lib/protected-route.tsx:23:3)
+    at Switch (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=e1ebbaaa:321:17)
+    at Router
+    at Provider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…unner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=e1ebbaaa:38:15)
+    at TooltipProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…rkspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=e1ebbaaa:64:5)
+    at MobileProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-mobile.tsx:20:34)
+    at AuthProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-auth.tsx:26:32)
+    at QueryClientProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit…rkspace/node_modules/.vite/deps/@tanstack_react-query.js?v=e1ebbaaa:2805:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+chunk-RPCDYKBN.js?v=e1ebbaaa:9129 Uncaught TypeError: machines.map is not a function
+    at Object.render (route-template-steps.tsx:721:35)

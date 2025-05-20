@@ -1,0 +1,93 @@
+queryClient.ts:17 
+            
+            
+           POST https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/api/orders 400 (Bad Request)
+apiRequest @ queryClient.ts:17
+mutationFn @ orders.tsx:127
+fn @ @tanstack_react-query.js?v=52b893c5:1189
+run @ @tanstack_react-query.js?v=52b893c5:494
+start @ @tanstack_react-query.js?v=52b893c5:536
+execute @ @tanstack_react-query.js?v=52b893c5:1225
+await in execute
+mutate @ @tanstack_react-query.js?v=52b893c5:2630
+(anonymous) @ @tanstack_react-query.js?v=52b893c5:3295
+handleSubmit @ orders.tsx:180
+(anonymous) @ chunk-MGW4VB6R.js?v=52b893c5:1469
+await in (anonymous)
+callCallback2 @ chunk-RPCDYKBN.js?v=52b893c5:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=52b893c5:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=52b893c5:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=52b893c5:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=52b893c5:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=52b893c5:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=52b893c5:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=52b893c5:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=52b893c5:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=52b893c5:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=52b893c5:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=52b893c5:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=52b893c5:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=52b893c5:5472
+dispatchDiscreteEvent @ chunk-RPCDYKBN.js?v=52b893c5:5449Understand this error
+queryClient.ts:25 API Error: 400 Bad Request at /api/orders
+apiRequest @ queryClient.ts:25
+await in apiRequest
+mutationFn @ orders.tsx:127
+fn @ @tanstack_react-query.js?v=52b893c5:1189
+run @ @tanstack_react-query.js?v=52b893c5:494
+start @ @tanstack_react-query.js?v=52b893c5:536
+execute @ @tanstack_react-query.js?v=52b893c5:1225
+await in execute
+mutate @ @tanstack_react-query.js?v=52b893c5:2630
+(anonymous) @ @tanstack_react-query.js?v=52b893c5:3295
+handleSubmit @ orders.tsx:180
+(anonymous) @ chunk-MGW4VB6R.js?v=52b893c5:1469
+await in (anonymous)
+callCallback2 @ chunk-RPCDYKBN.js?v=52b893c5:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=52b893c5:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=52b893c5:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=52b893c5:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=52b893c5:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=52b893c5:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=52b893c5:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=52b893c5:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=52b893c5:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=52b893c5:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=52b893c5:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=52b893c5:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=52b893c5:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=52b893c5:5472
+dispatchDiscreteEvent @ chunk-RPCDYKBN.js?v=52b893c5:5449Understand this error
+queryClient.ts:27 Error details: {"message":"null value in column \"unit_price\" of relation \"orders\" violates not-null constraint"}
+apiRequest @ queryClient.ts:27
+await in apiRequest
+mutationFn @ orders.tsx:127
+fn @ @tanstack_react-query.js?v=52b893c5:1189
+run @ @tanstack_react-query.js?v=52b893c5:494
+start @ @tanstack_react-query.js?v=52b893c5:536
+execute @ @tanstack_react-query.js?v=52b893c5:1225
+await in execute
+mutate @ @tanstack_react-query.js?v=52b893c5:2630
+(anonymous) @ @tanstack_react-query.js?v=52b893c5:3295
+handleSubmit @ orders.tsx:180
+(anonymous) @ chunk-MGW4VB6R.js?v=52b893c5:1469
+await in (anonymous)
+callCallback2 @ chunk-RPCDYKBN.js?v=52b893c5:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=52b893c5:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=52b893c5:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=52b893c5:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=52b893c5:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=52b893c5:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=52b893c5:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=52b893c5:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=52b893c5:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=52b893c5:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=52b893c5:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=52b893c5:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=52b893c5:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=52b893c5:5472
+dispatchDiscreteEvent @ chunk-RPCDYKBN.js?v=52b893c5:5449Understand this error
+queryClient.ts:33 API Request failed: POST /api/orders TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at throwIfResNotOk (queryClient.ts:5:29)
+    at apiRequest (queryClient.ts:30:11)
+    at async Object.mutationFn (orders.tsx:127:19)

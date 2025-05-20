@@ -1,0 +1,23 @@
+Warning: validateDOMNesting(...): <a> cannot appear as a descendant of &lt;a&gt;.
+    at a
+    at a
+    at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=14834467:337:18
+    at div
+    at div
+    at div
+    at header
+    at TopNavigation (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/components/layout/top-navigation.tsx:42:33)
+    at div
+    at div
+    at PageContainer (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/components/layout/page-container.tsx:23:3)
+    at UserManagement (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/pages/admin/user-management.tsx:44:21)
+    at Route (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=14834467:323:16)
+    at ProtectedRoute (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/lib/protected-route.tsx:22:3)
+    at Switch (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=14834467:379:17)
+    at Router
+    at Provider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-5AJU3CG7.js?v=14834467:38:15)
+    at TooltipProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=14834467:62:5)
+    at MobileProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-mobile.tsx:20:34)
+    at AuthProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-auth.tsx:26:32)
+    at QueryClientProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=14834467:2805:3)
+    at App

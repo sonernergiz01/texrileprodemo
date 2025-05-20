@@ -1,0 +1,76 @@
+Route params: 
+Object {}
+planId from route params: undefined
+URL path segments: 
+(3) ["", "planning", "production-steps"]
+planId from path segments: null
+planId from query: null
+Final planId: 0
+Query Request: GET /api/planning/process-types
+Query Request: GET /api/planning/machines
+Query Request failed: GET /api/planning/machines 
+SyntaxError {}
+
+Query Request: GET /api/planning/route-templates
+Query Request: GET /api/planning/production-cards
+Query Request: GET /api/orders
+Query Request: GET /api/admin/departments
+Query Error: 500 Internal Server Error at /api/planning/production-cards
+Error details: {"message":"relation \"production_cards\" does not exist","error":"error: relation \"production_cards\" does not exist"}
+Query Request failed: GET /api/planning/production-cards 
+TypeError {message: "Failed to execute 'text' on 'Response': body stream already read"}
+
+Query Request: GET /api/planning/tracking-summary
+Query Error: 403 Forbidden at /api/planning/tracking-summary
+Error details: {"message":"Bu işlem için yetkiniz bulunmamaktadır","details":"'planning_view' yetkisine sahip değilsiniz"}
+Query Request failed: GET /api/planning/tracking-summary 
+TypeError {message: "Failed to execute 'text' on 'Response': body stream already read"}
+
+Query Request: GET /api/weaving/machines
+Query Request: GET /api/weaving/work-orders
+Invalid time value
+Invalid time value
+The above error occurred in the <WeavingWorkOrdersPage> component:
+
+    at WeavingWorkOrdersPage (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/pages/weaving/work-orders.tsx:98:21)
+    at main
+    at div
+    at div
+    at AppLayout (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/components/layout/app-layout.tsx:21:29)
+    at Route (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=52b893c5:265:16)
+    at ProtectedRoute (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/lib/protected-route.tsx:23:3)
+    at Switch (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=52b893c5:321:17)
+    at Router
+    at Provider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=52b893c5:38:15)
+    at TooltipProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=52b893c5:64:5)
+    at MobileProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-mobile.tsx:20:34)
+    at AuthProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-auth.tsx:26:32)
+    at QueryClientProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=52b893c5:2805:3)
+    at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+at WeavingWorkOrdersPage (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/pages/weaving/work-orders.tsx:98:21)
+at main
+at div
+at div
+at AppLayout (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/components/layout/app-layout.tsx:21:29)
+at Route (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=52b893c5:265:16)
+at ProtectedRoute (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/lib/protected-route.tsx:23:3)
+at Switch (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/wouter.js?v=52b893c5:321:17)
+at Router
+at Provider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/chunk-OXZDJRWN.js?v=52b893c5:38:15)
+at TooltipProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@radix-ui_react-tooltip.js?v=52b893c5:64:5)
+at MobileProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-mobile.tsx:20:34)
+at AuthProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/src/hooks/use-auth.tsx:26:32)
+at QueryClientProvider (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/@fs/home/runner/workspace/node_modules/.vite/deps/@tanstack_react-query.js?v=52b893c5:2805:3)
+at App
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+at t.value (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:17465)
+at new t (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:12630)
+at t.value (https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:32766)
+at https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/__replco/static/devtools/eruda/3.2.3/eruda.js:2:34400
+Invalid time value

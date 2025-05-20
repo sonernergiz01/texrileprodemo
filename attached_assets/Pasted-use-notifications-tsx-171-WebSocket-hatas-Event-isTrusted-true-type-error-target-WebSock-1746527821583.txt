@@ -1,0 +1,25 @@
+use-notifications.tsx:171 WebSocket hatası: 
+Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+use-notifications.tsx:171 WebSocket hatası: 
+Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+use-notifications.tsx:171 WebSocket hatası: 
+Event {isTrusted: true, type: 'error', target: WebSocket, currentTarget: WebSocket, eventPhase: 2, …}
+queryClient.ts:66 
+ GET https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/api/production-tracking/production-cards 500 (Internal Server Error)
+queryClient.ts:79 Query Error: 500 Internal Server Error at /api/production-tracking/production-cards
+queryClient.ts:81 Error details: {"message":"Refakat kartları listelenirken bir hata oluştu","error":"error: syntax error at or near \"=\""}
+queryClient.ts:118 API yanıtı işlenirken kritik hata: TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at queryClient.ts:108:34
+queryClient.ts:122 Query Request failed: GET /api/production-tracking/production-cards TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at queryClient.ts:108:34
+use-notifications.tsx:123 WebSocket bağlantısı kuruldu
+queryClient.ts:65 Query Request: GET /api/production-tracking/production-cards
+queryClient.ts:66 
+ GET https://93916a28-22c9-4a31-9ccf-1aa0beee67e6-00-a4b490deef33.janeway.replit.dev/api/production-tracking/production-cards 500 (Internal Server Error)
+queryClient.ts:79 Query Error: 500 Internal Server Error at /api/production-tracking/production-cards
+queryClient.ts:81 Error details: {"message":"Refakat kartları listelenirken bir hata oluştu","error":"error: syntax error at or near \"=\""}
+queryClient.ts:118 API yanıtı işlenirken kritik hata: TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at queryClient.ts:108:34
+queryClient.ts:122 Query Request failed: GET /api/production-tracking/production-cards TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at queryClient.ts:108:34
+(anonymous)	@	queryClient.ts:122

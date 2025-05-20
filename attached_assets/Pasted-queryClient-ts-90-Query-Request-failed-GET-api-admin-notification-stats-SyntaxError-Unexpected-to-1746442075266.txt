@@ -1,0 +1,103 @@
+queryClient.ts:90 Query Request failed: GET /api/admin/notification-stats SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+(anonymous) @ queryClient.ts:90
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=e1ebbaaa:840
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+onSubscribe @ @tanstack_react-query.js?v=e1ebbaaa:1898
+subscribe @ @tanstack_react-query.js?v=e1ebbaaa:24
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=e1ebbaaa:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=e1ebbaaa:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=e1ebbaaa:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=e1ebbaaa:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=e1ebbaaa:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:19447
+commitRootImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19416
+commitRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:19277
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:18895
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=e1ebbaaa:9119
+(anonymous) @ chunk-RPCDYKBN.js?v=e1ebbaaa:18627Understand this error
+use-notifications.tsx:63 WebSocket bağlantısı kuruldu
+queryClient.ts:62 Query Request: GET /api/admin/notification-stats
+queryClient.ts:90 Query Request failed: GET /api/admin/notification-stats SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+(anonymous) @ queryClient.ts:90
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=e1ebbaaa:840
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+onSubscribe @ @tanstack_react-query.js?v=e1ebbaaa:1898
+subscribe @ @tanstack_react-query.js?v=e1ebbaaa:24
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=e1ebbaaa:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=e1ebbaaa:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=e1ebbaaa:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=e1ebbaaa:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=e1ebbaaa:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:19447
+commitRootImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19416
+commitRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:19277
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:18895
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=e1ebbaaa:9119
+(anonymous) @ chunk-RPCDYKBN.js?v=e1ebbaaa:18627Understand this error
+use-notifications.tsx:94 WebSocket bağlantısı kapatıldı
+2use-notifications.tsx:63 WebSocket bağlantısı kuruldu
+queryClient.ts:62 Query Request: GET /api/admin/notification-stats
+queryClient.ts:16 API Request: PATCH /api/notifications/183/read undefined
+queryClient.ts:90 Query Request failed: GET /api/admin/notification-stats SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+(anonymous) @ queryClient.ts:90
+await in (anonymous)
+fetchFn @ @tanstack_react-query.js?v=e1ebbaaa:840
+run @ @tanstack_react-query.js?v=e1ebbaaa:494
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:519
+Promise.then
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:515
+Promise.catch
+run @ @tanstack_react-query.js?v=e1ebbaaa:498
+start @ @tanstack_react-query.js?v=e1ebbaaa:536
+fetch @ @tanstack_react-query.js?v=e1ebbaaa:926
+executeFetch_fn @ @tanstack_react-query.js?v=e1ebbaaa:2211
+onSubscribe @ @tanstack_react-query.js?v=e1ebbaaa:1898
+subscribe @ @tanstack_react-query.js?v=e1ebbaaa:24
+(anonymous) @ @tanstack_react-query.js?v=e1ebbaaa:3022
+subscribeToStore @ chunk-RPCDYKBN.js?v=e1ebbaaa:11984
+commitHookEffectListMount @ chunk-RPCDYKBN.js?v=e1ebbaaa:16915
+commitPassiveMountOnFiber @ chunk-RPCDYKBN.js?v=e1ebbaaa:18156
+commitPassiveMountEffects_complete @ chunk-RPCDYKBN.js?v=e1ebbaaa:18129
+commitPassiveMountEffects_begin @ chunk-RPCDYKBN.js?v=e1ebbaaa:18119
+commitPassiveMountEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:18109
+flushPassiveEffectsImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19490
+flushPassiveEffects @ chunk-RPCDYKBN.js?v=e1ebbaaa:19447
+commitRootImpl @ chunk-RPCDYKBN.js?v=e1ebbaaa:19416
+commitRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:19277
+performSyncWorkOnRoot @ chunk-RPCDYKBN.js?v=e1ebbaaa:18895
+flushSyncCallbacks @ chunk-RPCDYKBN.js?v=e1ebbaaa:9119
+(anonymous) @ chunk-RPCDYKBN.js?v=e1ebbaaa:18627Understand this error
+use-notifications.tsx:94 WebSocket bağlantısı kapatıldı
+3use-notifications.tsx:63 WebSocket bağlantısı kuruldu
+use-notifications.tsx:94 WebSocket bağlantısı kapatıldı
+use-notifications.tsx:63 WebSocket bağlantısı kuruldu
+queryClient.ts:16 API Request: PATCH /api/notifications/180/read undefined
+use-notifications.tsx:94 WebSocket bağlantısı kapatıldı
+3use-notifications.tsx:63 WebSocket bağlantısı kuruldu
+use-notifications.tsx:94 WebSocket bağlantısı kapatıldı
+use-notifications.tsx:63 WebSocket bağlantısı kuruldu
+queryClient.ts:16 API Request: PATCH /api/notifications/179/read undefined

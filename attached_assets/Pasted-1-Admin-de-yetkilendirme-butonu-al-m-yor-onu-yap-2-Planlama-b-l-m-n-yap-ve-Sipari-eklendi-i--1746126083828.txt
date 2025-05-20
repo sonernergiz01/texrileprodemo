@@ -1,0 +1,17 @@
+1. Admin de yetkilendirme butonu çalışmıyor onu yap.
+2. Planlama bölümünü yap ve Sipariş eklendiği zaman planlamanın önüne düşsün.Gelen siparişin Ambardan çıkış işlemine kadar ki olan proseslerin hepsinin rotasını hazırlayıp termin tarihini pazarlama bölümündeki siparişinede yazılsın.
+3. Dokuma bölümü yap. Planamadan gelen işleri sıraya koydurarak girmesi gereken dokuma makinelerini belir. Dokuma fabrikalarında olan taharlama, çözgü vb. hazırlanışları barkodlu bir şekilde yöntmesine olanak tanı.
+4. Ürge bölümü yap. Üretim geliştirmede olması gereken bir kumaşın içindeki tüm atkı çözgü vb. bilgileri girebilmelerini sağla. Ve admin sayfsında bulunan kumaş kayıt sayfasını ürgenin gireceği ve kayıt yapabileceği şekilde ayarla.
+5. Ham kalite bölümü yarat. dokuma da ham olarak ürtilen kumaşların kalitelerini yaparak, Barkod çıkartarak Boya ve diğer işlemleri yapacak birime Ön Depo olarak teslimini sağla.
+6. Numuna Bölümü oluştur. Kendi içerisinde numune yapabilecek ve kendi proses rotasını oluşturabilecek bir modül olsun.
+7. İplik Büküm bölümü oluştur. Dokunacak kumaşların bükülmesini yöntecekleri modül olsun.
+8. Kumaş Laboratuvar bölümü oluştur. Boyanması gereken kumaşların boya reçetelerini hazırlayacakları bir modül olacak. Siparişten gelen müşteriye yapılacak kumaşları kendi ekranında görerek reçetelerini hazırlayacaklar. Her Kumaşın reçetesi farklı olacağı için. Ayrı bir sayfada bu reçete bilgilerini girmeleri gerekir.
+9. İplik Laboratuvar bölümü oluştur. Boyanması gerkeen iplikerin reçetelerini hazırlayacakları bir modül olacak. Siparişten gelen müşteriye yapılacak kumaşları kendi ekranında görerek reçetelerini hazırlayacaklar. Her Kumaşın reçetesi farklı olacağı için. Ayrı bir sayfada bu reçete bilgilerini girmeleri gerekir.
+10. Kartela bölümü oluştur. Yapılan kartelaları ekleyebilecekleri ve barkod basabilecekleri bir modül olacak.
+11. Kalite kontrol departmanında kumaşların son kaliteleri yapılacak. Puanlama sistemi girilecek. A1 A2 kumaş kaliteleri ortaya çıkacak. Kumaşı top haline getirip barkod basılacak ve Kumaş ambarına gönderilecek
+12. İpik Depo bölümü oluşturulacak. Alınan ipliklerin stok'ğu tutulacak. Fabrika içinde siparişte gelen kumaşların yaılması için ya büküme ya dokumaya yada Boyanması için İplik boya laboratuvarına gönderilecek. Barkodlu bir şekilde takibi sağlanılaca.
+
+13. Bu oluşturacağın bölümler için DB de gerekli tabloları oluşturup. Test dataları ile yapmalısın.
+
+Tüm bölümler birbiri ile bağlantılı ve Aynı bilgilerle çalışacak. Bu bir ERP projesi olacak
+  

@@ -1,0 +1,62 @@
+queryClient.ts:37 API Error: 400 Bad Request at /api/production-tracking/production-cards
+apiRequest @ queryClient.ts:37
+await in apiRequest
+mutationFn @ refakat-card-new.tsx:79
+fn @ @tanstack_react-query.js?v=66b2a405:1189
+run @ @tanstack_react-query.js?v=66b2a405:494
+start @ @tanstack_react-query.js?v=66b2a405:536
+execute @ @tanstack_react-query.js?v=66b2a405:1225
+await in execute
+mutate @ @tanstack_react-query.js?v=66b2a405:2630
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3295
+onSubmit @ refakat-card-new.tsx:110
+(anonymous) @ chunk-MGW4VB6R.js?v=66b2a405:1469
+await in (anonymous)
+callCallback2 @ chunk-RPCDYKBN.js?v=66b2a405:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=66b2a405:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=66b2a405:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=66b2a405:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=66b2a405:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=66b2a405:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=66b2a405:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=66b2a405:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=66b2a405:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=66b2a405:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=66b2a405:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=66b2a405:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=66b2a405:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=66b2a405:5472
+dispatchDiscreteEvent @ chunk-RPCDYKBN.js?v=66b2a405:5449Understand this error
+queryClient.ts:39 Error details: {"message":"Geçersiz refakat kartı verileri","errors":[{"code":"invalid_type","expected":"string","received":"undefined","path":["cardNo"],"message":"Required"},{"code":"invalid_type","expected":"number","received":"undefined","path":["orderId"],"message":"Required"},{"code":"invalid_type","expected":"string","received":"undefined","path":["barcode"],"message":"Required"}]}
+apiRequest @ queryClient.ts:39
+await in apiRequest
+mutationFn @ refakat-card-new.tsx:79
+fn @ @tanstack_react-query.js?v=66b2a405:1189
+run @ @tanstack_react-query.js?v=66b2a405:494
+start @ @tanstack_react-query.js?v=66b2a405:536
+execute @ @tanstack_react-query.js?v=66b2a405:1225
+await in execute
+mutate @ @tanstack_react-query.js?v=66b2a405:2630
+(anonymous) @ @tanstack_react-query.js?v=66b2a405:3295
+onSubmit @ refakat-card-new.tsx:110
+(anonymous) @ chunk-MGW4VB6R.js?v=66b2a405:1469
+await in (anonymous)
+callCallback2 @ chunk-RPCDYKBN.js?v=66b2a405:3674
+invokeGuardedCallbackDev @ chunk-RPCDYKBN.js?v=66b2a405:3699
+invokeGuardedCallback @ chunk-RPCDYKBN.js?v=66b2a405:3733
+invokeGuardedCallbackAndCatchFirstError @ chunk-RPCDYKBN.js?v=66b2a405:3736
+executeDispatch @ chunk-RPCDYKBN.js?v=66b2a405:7014
+processDispatchQueueItemsInOrder @ chunk-RPCDYKBN.js?v=66b2a405:7034
+processDispatchQueue @ chunk-RPCDYKBN.js?v=66b2a405:7043
+dispatchEventsForPlugins @ chunk-RPCDYKBN.js?v=66b2a405:7051
+(anonymous) @ chunk-RPCDYKBN.js?v=66b2a405:7174
+batchedUpdates$1 @ chunk-RPCDYKBN.js?v=66b2a405:18913
+batchedUpdates @ chunk-RPCDYKBN.js?v=66b2a405:3579
+dispatchEventForPluginEventSystem @ chunk-RPCDYKBN.js?v=66b2a405:7173
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ chunk-RPCDYKBN.js?v=66b2a405:5478
+dispatchEvent @ chunk-RPCDYKBN.js?v=66b2a405:5472
+dispatchDiscreteEvent @ chunk-RPCDYKBN.js?v=66b2a405:5449Understand this error
+queryClient.ts:50 API Request failed: POST /api/production-tracking/production-cards TypeError: Failed to execute 'text' on 'Response': body stream already read
+    at throwIfResNotOk (queryClient.ts:5:29)
+    at apiRequest (queryClient.ts:47:11)
+    at async Object.mutationFn (refakat-card-new.tsx:79:19)
